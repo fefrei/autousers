@@ -44,5 +44,14 @@
     <Setting Name="upgradeSettings" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="updateURL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://autousers.googlecode.com/svn/webupdate/</Value>
+    </Setting>
+    <Setting Name="performUpdateChecks" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="lastUpdateCheck" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2000-01-01</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

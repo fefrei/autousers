@@ -220,6 +220,42 @@ Partial Friend NotInheritable Class MySettings
             Me("upgradeSettings") = value
         End Set
     End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("https://autousers.googlecode.com/svn/webupdate/")>  _
+    Public Property updateURL() As String
+        Get
+            Return CType(Me("updateURL"),String)
+        End Get
+        Set
+            Me("updateURL") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+    Public Property performUpdateChecks() As Boolean
+        Get
+            Return CType(Me("performUpdateChecks"),Boolean)
+        End Get
+        Set
+            Me("performUpdateChecks") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("2000-01-01")>  _
+    Public Property lastUpdateCheck() As Date
+        Get
+            Return CType(Me("lastUpdateCheck"),Date)
+        End Get
+        Set
+            Me("lastUpdateCheck") = value
+        End Set
+    End Property
 End Class
 
 Namespace My

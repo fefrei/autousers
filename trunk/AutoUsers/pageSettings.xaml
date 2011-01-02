@@ -78,6 +78,9 @@ You should have received a copy of the GNU General Public License along with Aut
                         </CheckBox>
                     </StackPanel>
                 </GroupBox>
+                <GroupBox Header="AutoUsers" Margin="2">
+                    <CheckBox Content="Automatisch nach Updates suchen"  Margin="2" IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=performUpdateChecks}" />
+                </GroupBox>
             </StackPanel>
         </ScrollViewer>
     </Grid>

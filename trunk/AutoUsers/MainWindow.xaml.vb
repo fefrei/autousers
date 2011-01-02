@@ -10,7 +10,38 @@
 
 Class MainWindow
 
-    Private Sub Window_Loaded(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs) Handles MyBase.Loaded
+    Public UpdateCheckBackgroundWorker As ComponentModel.BackgroundWorker
 
+    Private Sub Window_Loaded(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs) Handles MyBase.Loaded
+        If My.Settings.lastUpdateCheck.AddDays(3) < Now Then
+            'Im Hintergund nach Updates suchen
+            UpdateCheckBackgroundWorker = New ComponentModel.BackgroundWorker
+            AddHandler UpdateCheckBackgroundWorker.DoWork, AddressOf DoUpdateCheck
+            AddHandler UpdateCheckBackgroundWorker.RunWorkerCompleted, AddressOf HandleUpdateCheckCompleted
+            UpdateCheckBackgroundWorker.RunWorkerAsync()
+        Else
+            Debug.WriteLine("Update check omitted.")
+        End If
+    End Sub
+
+    Private Sub DoUpdateCheck(ByVal sender As Object, ByVal e As ComponentModel.DoWorkEventArgs)
+        Debug.WriteLine("Update check running...")
+
+        Try
+            Dim CurrentVersion As Version = ToolBox.getCurrentVersionNumber
+
+            If CurrentVersion > My.Application.Info.Version Then
+                MsgBox("AutoUsers ist nicht mehr aktuell. Die aktuelle Version können Sie unter <autousers.googlecode.com> herunterladen.", MsgBoxStyle.Information)
+            Else
+                Debug.WriteLine("AutoUsers is up to date.")
+                My.Settings.lastUpdateCheck = Now
+                My.Settings.Save()
+            End If
+        Catch ex As Exception
+            Debug.WriteLine("Update check failed.")
+        End Try
+    End Sub
+
+    Private Sub HandleUpdateCheckCompleted(ByVal sender As Object, ByVal e As ComponentModel.RunWorkerCompletedEventArgs)
     End Sub
 End Class

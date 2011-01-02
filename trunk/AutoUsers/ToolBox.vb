@@ -134,4 +134,15 @@ Public Class ToolBox
 
         Return """" & myString & """" 'gibt setzt Anführungszeichen am Anfang und Ende
     End Function
+
+    Public Shared Function getCurrentVersionNumber() As Version
+        'Ermittelt die Versionsnummer der aktuellen Version aus dem Web. Kann mit Exception enden. Kann lange dauern.
+
+        Dim myWebClient As New System.Net.WebClient()
+        Dim VersionString As String = myWebClient.DownloadString(My.Settings.updateURL & "version.txt")
+
+        Dim CurrentVersion = New Version(VersionString)
+
+        Return CurrentVersion
+    End Function
 End Class
