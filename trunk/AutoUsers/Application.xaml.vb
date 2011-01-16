@@ -25,7 +25,7 @@ Class Application
                 Debug.WriteLine("BETA Version starting without interactive warning.")
             Else
                 'Benutzer warnen, dass er eine Betaversion ausführt
-                If MsgBox("Diese Version von AutoUsers ist nicht vollständig getestet. Wenn Sie fortfahren, kann es zu unerwarteten Resultaten, Datenverlust etc. kommen." & vbCrLf & "Möchten Sie fortfahren?", MsgBoxStyle.Exclamation + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "Betaversion von AutoUsers") = MsgBoxResult.No Then
+                If MsgBox("Diese Version von AutoUsers ist nicht vollständig getestet. Wenn Sie fortfahren, kann es zu unerwarteten Resultaten und Datenverlust kommen." & vbCrLf & "Möchten Sie fortfahren?", MsgBoxStyle.Exclamation + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "Betaversion von AutoUsers") = MsgBoxResult.No Then
                     End
                 End If
             End If
