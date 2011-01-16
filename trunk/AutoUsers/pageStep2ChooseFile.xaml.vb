@@ -14,6 +14,19 @@ Class pageStep2ChooseFile
     Public CurrentUserList As List(Of String) = Nothing
     Public CurrentUserListFullName As String = Nothing
 
+    Class FileAnalysisResult
+        Public FilePath As String
+        Public UserNames As List(Of String)
+        Public ErrorsEncountered As Boolean
+        Public ErrorList As List(Of String)
+        Public ResultString As String 'Text-Repräsentation des Ergebnisses
+
+        Sub New()
+            UserNames = New List(Of String)
+            ErrorList = New List(Of String)
+        End Sub
+    End Class
+
     Private Sub btnOpenFile_Click(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs) Handles btnOpenFile.Click
         Dim myOpenFileDialog As New Microsoft.Win32.OpenFileDialog() With {.Filter = "Kommagetrennte Dateien|*.csv|Textdateien|*.txt|Alle Dateien|*"}
         Dim UserCompletedForm As Boolean = myOpenFileDialog.ShowDialog

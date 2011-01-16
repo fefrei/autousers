@@ -116,10 +116,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AnalyzeUserChangesArgument.vb" />
-    <Compile Include="ApplyChangesResult.vb" />
     <Compile Include="CurrentState.vb" />
-    <Compile Include="FileAnalysisResult.vb" />
     <Compile Include="NetAPI.vb" />
     <Compile Include="pageLicense.xaml.vb">
       <DependentUpon>pageLicense.xaml</DependentUpon>

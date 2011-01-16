@@ -12,6 +12,17 @@ Class pageStep3CompareLists
     Public AnalyzeChangesBackgroundWorker As ComponentModel.BackgroundWorker
     Public PageIsVirgin As Boolean = True 'Gibt an, ob die Seite noch nie eine Analyse durchgeführt hat
 
+    Class AnalyzeUserChangesArgument
+        Public GroupName As String
+        Public NewUserList As List(Of String)
+
+        Sub New(ByVal newGroupName As String, ByVal newNewUserList As List(Of String))
+            GroupName = newGroupName
+            NewUserList = newNewUserList
+        End Sub
+    End Class
+
+
     Private Sub pageStep3ChooseGroup_Loaded(ByVal sender As Object, ByVal e As System.Windows.RoutedEventArgs) Handles Me.Loaded
         If Not PageIsVirgin Then
             If MsgBox("Die Informationen auf dieser Seite sind eventuell nicht mehr aktuell. Möchten Sie sie aktualisieren?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton1 + MsgBoxStyle.Exclamation) = MsgBoxResult.Yes Then

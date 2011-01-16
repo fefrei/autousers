@@ -13,6 +13,12 @@ Class pageStep4Execute
     Public bgwApplyChanges As ComponentModel.BackgroundWorker
     Public ProcessIsRunning As Boolean = False 'Gibt an, ob zur Zeit ein Vorgang läuft.
 
+    Class ApplyChangesResult
+        Public Log As List(Of String)
+        Public NewUsers As List(Of UserNameWithPassword)
+        Public ErrorList As List(Of String)
+    End Class
+
     Private Sub Page_Loaded(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs) Handles MyBase.Loaded
         If Not PageIsVirgin Then
             'aktuelle Version der Seite erzeugen
@@ -32,6 +38,16 @@ Class pageStep4Execute
         linkListName.Inlines.Add(New Run(CurrentState.CurrentUserListFullName))
         linkNewUsers.Inlines.Add(New Run(CurrentState.CurrentlyPlannedUserChanges.UsersToAdd.Count.ToString))
         linkOldUsers.Inlines.Add(New Run(CurrentState.CurrentlyPlannedUserChanges.UsersToDelete.Count.ToString))
+
+        'prüfen, ob der Job leer ist
+        If CurrentState.CurrentlyPlannedUserChanges.UsersToAdd.Count = 0 And CurrentState.CurrentlyPlannedUserChanges.UsersToDelete.Count = 0 Then
+            MsgBox("Es sind keine Veränderungen geplant. Der Vorgang wird abgebrochen.", MsgBoxStyle.Exclamation)
+            CurrentState.LastErrorList = New List(Of String)
+            CurrentState.LastNewUsers = New List(Of UserNameWithPassword)
+            CurrentState.LastLog = New List(Of String)
+            CurrentState.LastLog.Add("Es sind keine Veränderungen geplant. Der Vorgang wurde abgebrochen.")
+            Me.NavigationService.Navigate(New pageStep5Results)
+        End If
     End Sub
 
     Private Sub StartOrCancel(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs) Handles btnStartOrCancel.Click

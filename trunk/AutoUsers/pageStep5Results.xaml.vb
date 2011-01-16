@@ -48,6 +48,10 @@ Class pageStep5Results
     Private Sub btnExportNewUsers_Click(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs) Handles btnExportNewUsers.Click
         'Benutzerliste exportieren
 
-        ToolBox.exportUserPasswordList(CurrentState.LastNewUsers) 'diese Funktion fragt den Speicherort selbst ab
+        If CurrentState.LastNewUsers.Count > 1 Then
+            ToolBox.exportUserPasswordList(CurrentState.LastNewUsers) 'diese Funktion fragt den Speicherort selbst ab
+        Else
+            MsgBox("Es wurden keine Benutzer angelegt.", MsgBoxStyle.Exclamation)
+        End If
     End Sub
 End Class
