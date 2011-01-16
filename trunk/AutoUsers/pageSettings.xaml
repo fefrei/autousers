@@ -49,7 +49,7 @@ You should have received a copy of the GNU General Public License along with Aut
                                         Zeichen generieren und eine Liste ausgeben</TextBlock>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock VerticalAlignment="Center">Zeichenvorrat: </TextBlock>
-                                            <TextBox VerticalAlignment="Center" Margin="2" Text="{Binding Source={x:Static p:MySettings.Default}, Path=AutoPasswordChars}" IsEnabled="{Binding Source={x:Static p:MySettings.Default}, Path=autoGeneratePasswords, Mode=OneWay}" />
+                                            <TextBox VerticalAlignment="Center" Margin="2" Text="{Binding Source={x:Static p:MySettings.Default}, Path=AutoPasswordChars}" IsEnabled="{Binding Source={x:Static p:MySettings.Default}, Path=autoGeneratePasswords, Mode=OneWay}" Name="txtPasswordChars" />
                                         </StackPanel>
                                     </StackPanel>
                                 </RadioButton>

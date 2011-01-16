@@ -39,6 +39,7 @@ Class pageStep5Results
                 listLog.Items.Add(New TextBlock With {.TextWrapping = TextWrapping.Wrap, .Text = LogEntry})
             Next
         End If
+
     End Sub
 
     Private Sub btnGoToStart_Click(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs) Handles btnGoToStart.Click

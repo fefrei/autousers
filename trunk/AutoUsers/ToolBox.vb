@@ -145,4 +145,16 @@ Public Class ToolBox
 
         Return CurrentVersion
     End Function
+
+    Public Shared Function getSecurePasswordLength(Optional ByVal PasswordChars As String = Nothing) As Long
+        If PasswordChars Is Nothing Then
+            PasswordChars = My.Settings.AutoPasswordChars
+        End If
+
+        Try
+            Return Math.Ceiling(Math.Log(800000000000000, PasswordChars.Replace("|", Nothing).Count)) 'Länge des Kennworts, bei der es bei einem Brute-Force-Angriff mit 2,5 Mio Kennwörtern pro Sekunde 10 Jahre stand hält
+        Catch ex As Exception
+            Return 0
+        End Try
+    End Function
 End Class
