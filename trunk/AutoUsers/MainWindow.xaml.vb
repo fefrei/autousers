@@ -13,11 +13,10 @@ Class MainWindow
     Public UpdateCheckBackgroundWorker As ComponentModel.BackgroundWorker
 
     Private Sub Window_Loaded(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs) Handles MyBase.Loaded
-        If My.Settings.lastUpdateCheck.AddDays(3) < Now Then
+        If My.Settings.lastUpdateCheck.AddDays(My.Settings.performUpdateCheckEvery) < Now Then
             'Im Hintergund nach Updates suchen
             UpdateCheckBackgroundWorker = New ComponentModel.BackgroundWorker
             AddHandler UpdateCheckBackgroundWorker.DoWork, AddressOf DoUpdateCheck
-            AddHandler UpdateCheckBackgroundWorker.RunWorkerCompleted, AddressOf HandleUpdateCheckCompleted
             UpdateCheckBackgroundWorker.RunWorkerAsync()
         Else
             Debug.WriteLine("Update check omitted.")
@@ -40,8 +39,5 @@ Class MainWindow
         Catch ex As Exception
             Debug.WriteLine("Update check failed.")
         End Try
-    End Sub
-
-    Private Sub HandleUpdateCheckCompleted(ByVal sender As Object, ByVal e As ComponentModel.RunWorkerCompletedEventArgs)
     End Sub
 End Class

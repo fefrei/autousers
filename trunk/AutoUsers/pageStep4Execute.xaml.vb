@@ -42,6 +42,7 @@ Class pageStep4Execute
         'prüfen, ob der Job leer ist
         If CurrentState.CurrentlyPlannedUserChanges.UsersToAdd.Count = 0 And CurrentState.CurrentlyPlannedUserChanges.UsersToDelete.Count = 0 Then
             MsgBox("Es sind keine Veränderungen geplant. Der Vorgang wird abgebrochen.", MsgBoxStyle.Exclamation)
+            CurrentState.JobPending = False
             CurrentState.LastErrorList = New List(Of String)
             CurrentState.LastNewUsers = New List(Of UserNameWithPassword)
             CurrentState.LastLog = New List(Of String)

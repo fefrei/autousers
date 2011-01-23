@@ -256,6 +256,18 @@ Partial Friend NotInheritable Class MySettings
             Me("lastUpdateCheck") = value
         End Set
     End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("3")>  _
+    Public Property performUpdateCheckEvery() As Integer
+        Get
+            Return CType(Me("performUpdateCheckEvery"),Integer)
+        End Get
+        Set
+            Me("performUpdateCheckEvery") = value
+        End Set
+    End Property
 End Class
 
 Namespace My

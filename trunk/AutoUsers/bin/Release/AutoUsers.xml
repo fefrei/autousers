@@ -6,13 +6,21 @@ AutoUsers
 </name>
 </assembly>
 <members>
-<member name="M:AutoUsers.pageStep4Execute.InitializeComponent">
+<member name="M:AutoUsers.pageStart.InitializeComponent">
 	<summary>
 InitializeComponent
 </summary>
-</member><member name="T:AutoUsers.pageStep4Execute">
+</member><member name="T:AutoUsers.pageStart">
 	<summary>
-pageStep4Execute
+pageStart
+</summary>
+</member><member name="M:AutoUsers.pageStep3CompareLists.InitializeComponent">
+	<summary>
+InitializeComponent
+</summary>
+</member><member name="T:AutoUsers.pageStep3CompareLists">
+	<summary>
+pageStep3CompareLists
 </summary>
 </member><member name="M:AutoUsers.Application.InitializeComponent">
 	<summary>
@@ -34,22 +42,6 @@ InitializeComponent
 	<summary>
 MainWindow
 </summary>
-</member><member name="M:AutoUsers.pageStep3CompareLists.InitializeComponent">
-	<summary>
-InitializeComponent
-</summary>
-</member><member name="T:AutoUsers.pageStep3CompareLists">
-	<summary>
-pageStep3CompareLists
-</summary>
-</member><member name="M:AutoUsers.pageStart.InitializeComponent">
-	<summary>
-InitializeComponent
-</summary>
-</member><member name="T:AutoUsers.pageStart">
-	<summary>
-pageStart
-</summary>
 </member><member name="M:AutoUsers.pageStep1ChooseGroup.InitializeComponent">
 	<summary>
 InitializeComponent
@@ -58,21 +50,13 @@ InitializeComponent
 	<summary>
 pageStep1ChooseGroup
 </summary>
-</member><member name="M:AutoUsers.pageStep5Results.InitializeComponent">
+</member><member name="M:AutoUsers.pageStep4Execute.InitializeComponent">
 	<summary>
 InitializeComponent
 </summary>
-</member><member name="T:AutoUsers.pageStep5Results">
+</member><member name="T:AutoUsers.pageStep4Execute">
 	<summary>
-pageStep5Results
-</summary>
-</member><member name="M:AutoUsers.pageSettings.InitializeComponent">
-	<summary>
-InitializeComponent
-</summary>
-</member><member name="T:AutoUsers.pageSettings">
-	<summary>
-pageSettings
+pageStep4Execute
 </summary>
 </member><member name="M:AutoUsers.pageStep2ChooseFile.InitializeComponent">
 	<summary>
@@ -89,6 +73,22 @@ InitializeComponent
 </member><member name="T:AutoUsers.pageLicense">
 	<summary>
 pageLicense
+</summary>
+</member><member name="M:AutoUsers.pageStep5Results.InitializeComponent">
+	<summary>
+InitializeComponent
+</summary>
+</member><member name="T:AutoUsers.pageStep5Results">
+	<summary>
+pageStep5Results
+</summary>
+</member><member name="M:AutoUsers.pageSettings.InitializeComponent">
+	<summary>
+InitializeComponent
+</summary>
+</member><member name="T:AutoUsers.pageSettings">
+	<summary>
+pageSettings
 </summary>
 </member><member name="P:AutoUsers.My.Resources.Resources.ResourceManager">
 	<summary>
