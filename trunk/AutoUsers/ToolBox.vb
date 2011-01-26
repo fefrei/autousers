@@ -152,7 +152,7 @@ Public Class ToolBox
         End If
 
         Try
-            Return Math.Ceiling(Math.Log(800000000000000, PasswordChars.Replace("|", Nothing).Count)) 'Länge des Kennworts, bei der es bei einem Brute-Force-Angriff mit 2,5 Mio Kennwörtern pro Sekunde 10 Jahre stand hält
+            Return Math.Ceiling(Math.Log(800000000000000, PasswordChars.Replace("|", Nothing).Length)) 'Länge des Kennworts, bei der es bei einem Brute-Force-Angriff mit 2,5 Mio Kennwörtern pro Sekunde 10 Jahre stand hält
         Catch ex As Exception
             Return 0
         End Try

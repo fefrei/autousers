@@ -160,13 +160,14 @@ Class pageStep4Execute
 
             CurrentChangeID += 1
             DoReportProgress(CurrentChangeID, TotalChanges, LogBuffer, FullLog)
-            LogBuffer.Add("Lösche Benutzer " & UserName & "...")
 
             Try
                 'Bnutzer löschen / deaktivieren
                 If My.Settings.deleteUsers Then
+                    LogBuffer.Add("Lösche Benutzer " & UserName & "...")
                     NetAPI.DeleteUser(UserName)
                 ElseIf My.Settings.disableUsers Then
+                    LogBuffer.Add("Deaktiviere Benutzer " & UserName & "...")
                     NetAPI.SetAccountDisabled(UserName)
                 End If
             Catch ex As Exception
