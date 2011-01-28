@@ -143,7 +143,7 @@ Public Class NetAPI
 
         Try
             If ExpirePassword Then
-                Dim objUser = GetObject("WinNT://localhost/" & UserName & ",user")
+                Dim objUser = GetObject("WinNT://" & My.Computer.Name & "/" & UserName & ",user")
                 objUser.PasswordExpired = 1
                 objUser.SetInfo()
             End If
@@ -187,7 +187,7 @@ Public Class NetAPI
 #Region "SetAccountDisabled"
     Public Shared Sub SetAccountDisabled(ByVal UserName As String, Optional ByVal IsDisabled As Boolean = True)
         Try
-            Dim objUser = GetObject("WinNT://localhost/" & UserName & ",user")
+            Dim objUser = GetObject("WinNT://" & My.Computer.Name & "/" & UserName & ",user")
             objUser.AccountDisabled = IsDisabled
             objUser.SetInfo()
         Catch ex As Exception
