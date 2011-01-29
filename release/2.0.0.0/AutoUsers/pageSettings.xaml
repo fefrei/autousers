@@ -1,0 +1,87 @@
+﻿<!--
+Copyright (c) 2010, 2011 Felix Freiberger
+felix@familie-freiberger.net
+
+This file is part of AutoUsers.
+
+AutoUsers is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+AutoUsers is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along with AutoUsers.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<Page x:Class="pageSettings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:p="clr-namespace:AutoUsers"       
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="450"
+      Title="Einstellungen" xmlns:my="clr-namespace:AutoUsers">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Einstellungen" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Button Name="btnSaveSettings" Grid.Row="2" Content="Einstellungen speichern" IsDefault="True" Margin="5"/>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Name="stackSettings">
+                <GroupBox Header="Benutzer anlegen" Margin="2">
+                    <StackPanel>
+                        <CheckBox Content="neue Benutzer automatisch der ausgewählten Gruppe hinzufügen" Margin="2" IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=autoAddNewUsersToGroup}"/>
+                        <GroupBox Header="Passwortvergabe" Margin="2">
+                            <StackPanel>
+                                <RadioButton Margin="2" IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=setDefaultPassword}">
+                                        <TextBlock>allen Benutzern das Kennwort
+                                            <Hyperlink Click="SetNewDefaultPassword" IsEnabled="{Binding Source={x:Static p:MySettings.Default}, Path=setDefaultPassword, Mode=OneWay}">
+                                            <TextBlock Name="txtDefaultPassword" Text="{Binding Source={x:Static p:MySettings.Default}, Path=DefaultPassword}" />
+                                            </Hyperlink>
+                                            geben
+                                        </TextBlock>
+                                </RadioButton>
+                                <RadioButton Margin="2" IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=autoGeneratePasswords}">
+                                    <StackPanel>
+                                        <TextBlock>zufällige Kennwörter mit
+                                        <Hyperlink Click="SetNewAutoPasswordLength" IsEnabled="{Binding Source={x:Static p:MySettings.Default}, Path=autoGeneratePasswords, Mode=OneWay}">
+                                            <TextBlock Name="txtAutoPasswordLength" Text="{Binding Source={x:Static p:MySettings.Default}, Path=AutoPasswordLength, Mode=TwoWay}" />
+                                        </Hyperlink>
+                                        Zeichen generieren und eine Liste ausgeben</TextBlock>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock VerticalAlignment="Center">Zeichenvorrat: </TextBlock>
+                                            <TextBox VerticalAlignment="Center" Margin="2" Text="{Binding Source={x:Static p:MySettings.Default}, Path=AutoPasswordChars}" IsEnabled="{Binding Source={x:Static p:MySettings.Default}, Path=autoGeneratePasswords, Mode=OneWay}" Name="txtPasswordChars" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </RadioButton>
+                                <RadioButton Margin="2" Content="keine Kennwörter vergeben (Kennwortfeld bleibt leer)"  IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=setEmptyPasswords}" />
+                            </StackPanel>
+                        </GroupBox>
+                        <CheckBox Margin="2" Content="Kennwörter müssen bei der ersten Anmeldung geändert werden" IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=ExpireNewPasswords}" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Benutzer löschen" Margin="2">
+                    <StackPanel>
+                        <GroupBox Header="Löschung der Benutzerkonten" Margin="2">
+                            <StackPanel>
+                                <RadioButton Margin="2" Content="Benuterkonten endgültig löschen" IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=deleteUsers}" />
+                                <RadioButton Margin="2" Content="Benuterkonten deaktivieren" IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=disableUsers}" />
+                            </StackPanel>
+                        </GroupBox>
+                        <CheckBox Margin="2" IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=deleteUserFiles}">
+                            <GroupBox Header="Dateien des Benutzers löschen">
+                                <TextBlock>Batch-Datei: 
+                                            <Hyperlink Click="SetNewDeleteUserFilesBatch" IsEnabled="{Binding Source={x:Static p:MySettings.Default}, Path=deleteUserFiles, Mode=OneWay}">
+                                            <TextBlock Name="txtDeleteUserFilesPath" Text="{Binding Source={x:Static p:MySettings.Default}, Path=deleteUserFilesBatch}" />
+                                            </Hyperlink>
+                                        </TextBlock>
+                            </GroupBox>
+                        </CheckBox>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="AutoUsers" Margin="2">
+                    <CheckBox Content="Automatisch nach Updates suchen"  Margin="2" IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=performUpdateChecks}" />
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
