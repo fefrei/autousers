@@ -40,7 +40,6 @@ Public Class ToolBox
 
     Public Shared Function generatePassword(ByVal PasswordLength As Integer)
         'Generiert selbstständig ein Kennwort aus einem vorgegenbenen Zeichenvorrat.
-        'TODO: bessere Kennwort-Generierung (ohne festes Muster)
 
         Try
             Dim PasswordChars() As String = My.Settings.AutoPasswordChars.Split("|")

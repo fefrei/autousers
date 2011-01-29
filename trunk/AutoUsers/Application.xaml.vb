@@ -13,7 +13,7 @@ Class Application
     ' Ereignisse auf Anwendungsebene wie Startup, Exit und DispatcherUnhandledException
     ' können in dieser Datei verarbeitet werden.
 
-    Public Const VersionIsBeta As Boolean = True
+    Public Const VersionIsBeta As Boolean = False
 
     Private Sub Application_Startup(ByVal sender As System.Object, ByVal e As System.Windows.StartupEventArgs) Handles MyBase.Startup
         Randomize()
