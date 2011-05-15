@@ -1,0 +1,41 @@
+﻿<!--
+Copyright (c) 2010, 2011 Felix Freiberger
+felix@familie-freiberger.net
+
+This file is part of AutoUsers.
+
+AutoUsers is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+AutoUsers is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along with AutoUsers.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<Page x:Class="pageStep4Execute"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="450"
+      Title="Schritt 4: Kontrolle und Ausführung">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="75"/>
+            <RowDefinition />
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Auftragsübersicht" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <GroupBox Name="gbPreviewChanges" Header="Übersicht" Grid.Row="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBlock TextWrapping="Wrap">Die lokale Benutzergruppe <Hyperlink Name="linkGroupName" NavigateUri="pageStep1ChooseGroup.xaml" /> wird mit der Benutzerliste <Hyperlink Name="linkListName" NavigateUri="pageStep2ChooseFile.xaml" /> abgeglichen. Dabei werden <Hyperlink Name="linkNewUsers" NavigateUri="pageStep3CompareLists.xaml" /> Benutzer angelegt und <Hyperlink Name="linkOldUsers" NavigateUri="pageStep3CompareLists.xaml" /> Benutzer gelöscht. Möchten Sie die <Hyperlink NavigateUri="pageSettings.xaml">Einstellungen ändern</Hyperlink>?</TextBlock>
+                </ScrollViewer>
+            </GroupBox>
+            <GroupBox Header="Protokoll" Grid.Row="2">
+            <ScrollViewer Name="scrollLog">
+                <ListBox Name="listLog" />
+            </ScrollViewer>
+            </GroupBox>
+            <ProgressBar Name="prgOverallProgress" Grid.Row="3" Margin="2" />
+        <Button Name="btnStartOrCancel" Grid.Row="4" Content="Änderungen jetzt übernehmen" Margin="5" IsDefault="True" />
+    </Grid>
+</Page>

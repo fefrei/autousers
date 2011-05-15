@@ -1,0 +1,9 @@
+﻿2.0.0.0
+ - Erstveröffentlichung
+
+2.0.1.0
+ - kleine sprachliche Fehler beseitigt
+ - ";" wird als Trennzeichen erkannt --> kann auch zeilenweise Benutzerlisten einlesen
+ - Überprüfung, ob die Einstellungen zur Kennwortgenerierung OK sind
+ - sicherere Kennwortgenerierung
+ - Rückfrage beim Beenden / Kein Beenden wenn ein Vorgang läuft
