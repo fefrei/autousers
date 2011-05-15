@@ -12,6 +12,17 @@ Class MainWindow
 
     Public UpdateCheckBackgroundWorker As ComponentModel.BackgroundWorker
 
+    Private Sub MainWindow_Closing(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles Me.Closing
+        If CurrentState.ProcessIsRunning Then
+            e.Cancel = True
+            MsgBox("AutoUsers kann nicht beendet werden, da zur Zeit ein Vorgang läuft.", MsgBoxStyle.Exclamation)
+        ElseIf CurrentState.JobPending Then
+            If MsgBox("Wenn Sie AutoUsers jetzt beenden, gehen die bereits eingegebenen Daten verloren. Sind Sie sich sicher?", MsgBoxStyle.Question + MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+                e.Cancel = True
+            End If
+        End If
+    End Sub
+
     Private Sub Window_Loaded(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs) Handles MyBase.Loaded
         If My.Settings.lastUpdateCheck.AddDays(My.Settings.performUpdateCheckEvery) < Now Then
             'Im Hintergund nach Updates suchen

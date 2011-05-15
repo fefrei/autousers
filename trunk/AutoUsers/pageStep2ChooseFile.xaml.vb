@@ -48,7 +48,7 @@ Class pageStep2ChooseFile
     End Sub
 
     Private Sub DoAnalyzeFile(ByVal sender As Object, ByVal e As ComponentModel.DoWorkEventArgs)
-        Dim SeparatingCharacters As String = "," & vbCr & vbLf
+        Dim SeparatingCharacters As String = ";," & vbCr & vbLf
 
         Dim ReturnValue As New FileAnalysisResult
 

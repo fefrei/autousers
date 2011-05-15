@@ -38,24 +38,70 @@ Public Class ToolBox
         Return True
     End Function
 
+    'Public Shared Function generatePassword(ByVal PasswordLength As Integer)
+    '    'alte Version - Backup
+
+    '    'Generiert selbstständig ein Kennwort aus einem vorgegenbenen Zeichenvorrat.
+
+    '    Try
+    '        Dim PasswordChars() As String = My.Settings.AutoPasswordChars.Split("|")
+
+    '        Dim newPassword As String = Nothing
+
+    '        For n As Integer = 1 To PasswordLength
+    '            Dim CharSetID As Byte = (n - 1) Mod PasswordChars.Length 'gibt an, aus welchem Zeichenvorrat ein Zeichen kommt
+    '            Dim CharacterID As Integer = Int(Rnd() * PasswordChars(CharSetID).Length)
+    '            newPassword &= PasswordChars(CharSetID).Substring(CharacterID, 1)
+    '        Next
+
+    '        Return newPassword
+    '    Catch ex As Exception
+    '        Throw New Exception("Ein Kennwort konnte nicht generiert werden. Möglicherweise haben Sie eine ungültige Zeichenfolge in den Einstellungen eingegeben. Fehler: " & ex.Message, ex)
+    '    End Try
+    'End Function
+
     Public Shared Function generatePassword(ByVal PasswordLength As Integer)
         'Generiert selbstständig ein Kennwort aus einem vorgegenbenen Zeichenvorrat.
 
         Try
-            Dim PasswordChars() As String = My.Settings.AutoPasswordChars.Split("|")
+            Dim PasswordCharBlocks() As String = My.Settings.AutoPasswordChars.Split("|")
+            Dim PasswordChars As String = My.Settings.AutoPasswordChars.Replace("|", Nothing)
+
+            If PasswordLength < PasswordCharBlocks.GetLength(0) Then Throw New Exception("Kennwortlänge geringer als die Anzahl der Zeichengruppen.")
 
             Dim newPassword As String = Nothing
 
-            For n As Integer = 1 To PasswordLength
-                Dim CharSetID As Byte = (n - 1) Mod PasswordChars.Length 'gibt an, aus welchem Zeichenvorrat ein Zeichen kommt
-                Dim CharacterID As Integer = Int(Rnd() * PasswordChars(CharSetID).Length)
-                newPassword &= PasswordChars(CharSetID).Substring(CharacterID, 1)
+            'Zuerst einmal aus jedem Block ein Zeichen, damit die Kennwortrichtlinien erfüllt werden
+            For n As Integer = 0 To PasswordCharBlocks.GetLength(0) - 1
+                newPassword &= PasswordCharBlocks(n).Substring(Int(Rnd() * PasswordCharBlocks(n).Length), 1) 'Zufallszeichen aus diesem Block
             Next
+
+            'Jetzt auffüllen mit Zufallszeichen
+            While newPassword.Length < PasswordLength
+                newPassword &= PasswordChars.Substring(Int(Rnd() * PasswordChars.Length), 1)
+            End While
+
+            'mischen
+            newPassword = randomizeCharOrder(newPassword)
 
             Return newPassword
         Catch ex As Exception
             Throw New Exception("Ein Kennwort konnte nicht generiert werden. Möglicherweise haben Sie eine ungültige Zeichenfolge in den Einstellungen eingegeben. Fehler: " & ex.Message, ex)
         End Try
+    End Function
+
+    Public Shared Function randomizeCharOrder(ByVal InString As String) As String
+        'mischt die Zeichen in einem String
+
+        Dim OutString As String = ""
+
+        While InString.Length > 0
+            Dim CharID As Integer = Int(Rnd() * InString.Length)
+            OutString &= InString.Substring(CharID, 1)
+            InString = InString.Remove(CharID, 1)
+        End While
+
+        Return OutString
     End Function
 
     Public Shared Sub deleteUserFiles(ByVal UserName As String)
@@ -72,7 +118,7 @@ Public Class ToolBox
     End Sub
 
     Public Shared Function getHash(ByVal InputString As String) As String
-        'Ermittelt einen Hash-Wert einer Datei. SHA512-basiert, aber nicht standardkonform implementiert. Nur zur Programminternen Nutzung.
+        'Ermittelt einen Hash-Wert einer Datei. SHA512-basiert, aber nicht standardkonform implementiert. Nur zur programminternen Nutzung.
         Dim CryptoProvider As New Security.Cryptography.SHA512CryptoServiceProvider
         Dim BytesArray() As Byte = System.Text.Encoding.UTF8.GetBytes(InputString)
         BytesArray = CryptoProvider.ComputeHash(BytesArray)

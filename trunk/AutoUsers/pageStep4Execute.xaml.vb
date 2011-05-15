@@ -11,7 +11,6 @@
 Class pageStep4Execute
     Public PageIsVirgin As Boolean = True
     Public bgwApplyChanges As ComponentModel.BackgroundWorker
-    Public ProcessIsRunning As Boolean = False 'Gibt an, ob zur Zeit ein Vorgang läuft.
 
     Class ApplyChangesResult
         Public Log As List(Of String)
@@ -52,7 +51,7 @@ Class pageStep4Execute
     End Sub
 
     Private Sub StartOrCancel(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs) Handles btnStartOrCancel.Click
-        If ProcessIsRunning Then
+        If CurrentState.ProcessIsRunning Then
             'Abruch
             If MsgBox("Wenn Sie den Vorgang abbrechen, haben Sie keinen Zugriff auf das Protokoll und die Liste angelegter Benutzer." & vbCrLf & "Möchten Sie den Vorgang abbrechen?", MsgBoxStyle.Exclamation + MsgBoxStyle.YesNo, "Vorgang abbrechen") = MsgBoxResult.Yes Then
                 btnStartOrCancel.IsEnabled = False
@@ -60,6 +59,17 @@ Class pageStep4Execute
                 bgwApplyChanges.CancelAsync() 'Abbruch beantragen
             End If
         Else
+            'prüfen, ob die Kennworteinstellungen OK sind
+            If (My.Settings.autoGeneratePasswords And _
+                    ((My.Settings.AutoPasswordLength = 0 Or My.Settings.AutoPasswordChars.Replace("|", Nothing).Length = 0)) _
+                    Or My.Settings.AutoPasswordChars.Contains("||") _
+                    Or My.Settings.AutoPasswordLength < My.Settings.AutoPasswordChars.Count(Function(x As Char) x = "|") + 1) Then
+                MsgBox("Die Einstellungen zum Erzeugen der Kennwörter sind falsch. Bitte überprüfen Sie diese.", MsgBoxStyle.Exclamation)
+                Me.NavigationService.Navigate(New pageSettings)
+                Exit Sub
+            End If
+
+
             'Start des Vorgangs
 
             'Sicherheitsabfragen
@@ -86,7 +96,7 @@ Class pageStep4Execute
                 AddHandler .ProgressChanged, AddressOf ApplyProgressChangeAndNewLogEntries
             End With
 
-            ProcessIsRunning = True
+            CurrentState.ProcessIsRunning = True
             bgwApplyChanges.RunWorkerAsync(CurrentState.CurrentlyPlannedUserChanges)
             btnStartOrCancel.Content = "Vorgang abbrechen"
             btnStartOrCancel.IsCancel = True
@@ -225,6 +235,8 @@ Class pageStep4Execute
     End Sub
 
     Private Sub ProcessFinished(ByVal sender As Object, ByVal e As ComponentModel.RunWorkerCompletedEventArgs)
+        CurrentState.ProcessIsRunning = False
+
         'Fehler?
         If e.Error IsNot Nothing Then
             MsgBox("Der Vorgang führte zu einem unerwarteten Fehler. AutoUsers muss jetzt beendet werden. Möglicherweise wurde ein Teil der Änderungen übernommen." & vbCrLf & "Fehlermeldung: " & e.Error.Message, MsgBoxStyle.Critical, "Kritischer Fehler")

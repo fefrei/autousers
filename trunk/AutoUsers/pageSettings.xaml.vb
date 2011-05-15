@@ -37,7 +37,6 @@ Class pageSettings
             End If
             txtAutoPasswordLength.Text = NewLength.ToString
         End If
-
     End Sub
 
     Private Sub SetNewDeleteUserFilesBatch(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs)

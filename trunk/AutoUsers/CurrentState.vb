@@ -21,4 +21,6 @@ Public Class CurrentState
     Public Shared LastLog As List(Of String) = Nothing
     Public Shared LastNewUsers As List(Of UserNameWithPassword) = Nothing
     Public Shared LastErrorList As List(Of String) = Nothing
+    Public Shared ProcessIsRunning As Boolean = False 'Gibt an, ob zur Zeit ein Vorgang läuft.
+
 End Class
