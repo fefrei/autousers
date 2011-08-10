@@ -106,3 +106,6 @@ C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Release\AutoUsers
 C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Release\AutoUsers.Resources.resources
 C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Release\GenerateResource.read.1.tlog
 C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Release\Changelog.txt
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Release\pageToolbox.baml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Release\pageToolbox.g.vb

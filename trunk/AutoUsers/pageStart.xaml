@@ -48,11 +48,13 @@ You should have received a copy of the GNU General Public License along with Aut
         </GroupBox>
         <Grid Name="gridButtons" Grid.Row="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
-            <Button Name="btnShowSettings" Grid.Column="0" Margin="5" Content="Einstellungen anzeigen" Click="GoToSettings" />
-            <Button Name="btnStartWizard" Grid.Column="1" Margin="5" Content="Listenabgleich starten" Click="GoToStep1" IsDefault="True" />
+            <Button Name="btnShowSettings" Grid.Column="0" Margin="5" Content="Einstellungen" Click="GoToSettings" />
+            <Button Name="btnShowToolbox" Grid.Column="1" Margin="5" Content="Toolbox" Click="GoToToolbox" />
+            <Button Name="btnStartWizard" Grid.Column="2" Margin="5" Content="Listenabgleich starten" Click="GoToStep1" IsDefault="True" />
         </Grid>
     </Grid>
 </Page>

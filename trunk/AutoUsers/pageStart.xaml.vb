@@ -29,4 +29,8 @@ Class pageStart
     Private Sub GoToStep1(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs)
         NavigationService.Navigate(New pageStep1ChooseGroup)
     End Sub
+
+    Private Sub GoToToolbox(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs)
+        NavigationService.Navigate(New pageToolbox)
+    End Sub
 End Class

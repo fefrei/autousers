@@ -25,6 +25,7 @@ Class pageStep5Results
         End If
 
         'neue Benutzer anzeigen
+
         If CurrentState.LastNewUsers.Count > 0 Then
             listNewUsers.Items.Clear()
             For Each NewUser In CurrentState.LastNewUsers

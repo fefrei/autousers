@@ -106,7 +106,7 @@ Class pageStep4Execute
     Private Sub DoApplyChanges(ByVal sender As Object, ByVal e As ComponentModel.DoWorkEventArgs)
         'Diese Funktion wird im BackgroundWorker ausgeführt.
 
-        Debug.WriteLine("Background worker started.")
+        Debug.WriteLine("BackgroundWorker started.")
         Dim myUserChanges As UserChanges = e.Argument 'Auftragsdaten speichern
         Dim TotalChanges As Integer = myUserChanges.UsersToAdd.Count + myUserChanges.UsersToDelete.Count 'Gesamte Anzahl der Veränderungen
         Dim CurrentChangeID As Integer = 0 'wird benutzt, um den Fortschritt anzugeben
@@ -135,12 +135,7 @@ Class pageStep4Execute
             LogBuffer.Add("Erzeuge Benutzer " & UserName & "...")
             Try
                 'Passwort ermitteln
-                Dim newPassword As String = Nothing
-                If My.Settings.setDefaultPassword Then
-                    newPassword = My.Settings.DefaultPassword
-                ElseIf My.Settings.autoGeneratePasswords Then
-                    newPassword = ToolBox.generatePassword(My.Settings.AutoPasswordLength)
-                End If
+                Dim newPassword As String = ToolBox.getPassword
 
                 'Benutzer erzeugen
                 NetAPI.CreateUser(UserName, newPassword, My.Settings.ExpireNewPasswords)

@@ -121,3 +121,6 @@ C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\GenerateRes
 C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers.exe
 C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers.xml
 C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers.pdb
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageToolbox.baml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageToolbox.g.vb
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Debug\Changelog.txt

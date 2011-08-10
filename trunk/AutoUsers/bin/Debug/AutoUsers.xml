@@ -54,6 +54,14 @@ InitializeComponent
 	<summary>
 pageStep3CompareLists
 </summary>
+</member><member name="M:AutoUsers.pageToolbox.InitializeComponent">
+	<summary>
+InitializeComponent
+</summary>
+</member><member name="T:AutoUsers.pageToolbox">
+	<summary>
+pageToolbox
+</summary>
 </member><member name="M:AutoUsers.MainWindow.InitializeComponent">
 	<summary>
 InitializeComponent

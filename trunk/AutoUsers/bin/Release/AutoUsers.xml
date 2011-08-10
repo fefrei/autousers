@@ -6,7 +6,15 @@ AutoUsers
 </name>
 </assembly>
 <members>
-<member name="M:AutoUsers.pageStart.InitializeComponent">
+<member name="M:AutoUsers.pageToolbox.InitializeComponent">
+	<summary>
+InitializeComponent
+</summary>
+</member><member name="T:AutoUsers.pageToolbox">
+	<summary>
+pageToolbox
+</summary>
+</member><member name="M:AutoUsers.pageStart.InitializeComponent">
 	<summary>
 InitializeComponent
 </summary>

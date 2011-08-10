@@ -25,15 +25,12 @@ Public Class NetAPI
     '  LPWSTR lgrpi0_name;
     '} LOCALGROUP_INFO_0, *PLOCALGROUP_INFO_0, *LPLOCALGROUP_INFO_0;
 
-
     Private Structure LOCALGROUP_MEMBERS_INFO_3
         <MarshalAs(UnmanagedType.LPWStr)> Dim DomainAndName As String
     End Structure
     'typedef struct _LOCALGROUP_MEMBERS_INFO_3 {
     '  LPWSTR lgrmi3_domainandname;
     '} LOCALGROUP_MEMBERS_INFO_3;
-
-
 
     Private Structure USER_INFO_1
         <MarshalAs(UnmanagedType.LPWStr)> Dim UserName As String
@@ -57,9 +54,15 @@ Public Class NetAPI
     '} USER_INFO_1, *PUSER_INFO_1, *LPUSER_INFO_1;
 
 
+    Private Structure USER_INFO_1003
+        <MarshalAs(UnmanagedType.LPWStr)> Dim Password As String
+    End Structure
+    'typedef struct _USER_INFO_1003 {
+    '  LPWSTR usri1003_password;
+    '} USER_INFO_1003, *PUSER_INFO_1003, *LPUSER_INFO_1003;#End Region
 #End Region
 
-#Region "GetLocalGroupNames"
+#Region "GetGroupNames"
     Private Declare Function NetLocalGroupEnum Lib "netapi32.dll" (<MarshalAs(UnmanagedType.LPWStr)> ByVal servername As String, ByVal level As Integer, ByRef bufptr As IntPtr, ByVal prefmaxlen As Integer, ByRef entriesread As Integer, ByRef totalentries As Integer, ByRef resumhandle As Integer) As Integer
     '__in     LPCWSTR servername,
     '__in     DWORD level,
@@ -70,7 +73,7 @@ Public Class NetAPI
     '__inout  PDWORD_PTR resumehandle
 
 
-    Public Shared Function GetLocalGroupNames() As List(Of String)
+    Public Shared Function GetGroupNames() As List(Of String)
         'Gibt eine Liste der Namen der lokalen Gruppen aus.
         Dim ResultPtr As IntPtr
         Dim EntriesRead As Integer
@@ -196,8 +199,82 @@ Public Class NetAPI
     End Sub
 #End Region
 
+#Region "DoesUserExist"
+    Public Shared Function DoesUserExist(ByVal UserName As String) As Integer
+        'holt UserInfo, wenn das fehlschlägt, gibt es den Benutzer nicht
 
-#Region "Unused"
+        Dim ResultPtr As IntPtr
+        Dim ErrorCode As Integer = NetUserGetInfo(Nothing, UserName, 1, ResultPtr)
+
+        Select Case ErrorCode
+            Case 0
+                Return True
+            Case 2221
+                Return False 'Fehlercode 2221 = Benutzername nicht gefunden
+            Case Else
+                Throw New Exception("API-Kommuniktationsfehler bei NetUserGetInfo: " & ErrorCode.ToString)
+        End Select
+
+    End Function
+#End Region
+
+#Region "UserOptions"
+
+    Public Shared Function GetUserOptions(ByVal UserName As String) As UserOptions
+        Try
+            Dim ReturnValue = New UserOptions()
+
+            Dim objUser = GetObject("WinNT://" & My.Computer.Name & "/" & UserName & ",user")
+
+            ReturnValue.UserIsDisabled = objUser.AccountDisabled
+            ReturnValue.PasswordExpired = objUser.PasswordExpired = 1
+
+            Return ReturnValue
+        Catch ex As Exception
+            Throw New Exception("Fehler bei GetUserOptions.", ex)
+        End Try
+    End Function
+
+    Public Shared Sub SetUserOptions(ByVal UserName As String, ByVal newUserOptions As UserOptions)
+        Try
+            If newUserOptions.Password IsNot Nothing Then
+                SetUserPassword(UserName, newUserOptions.Password)
+            End If
+
+            Dim objUser = GetObject("WinNT://" & My.Computer.Name & "/" & UserName & ",user")
+
+            objUser.AccountDisabled = newUserOptions.UserIsDisabled
+            Select Case newUserOptions.PasswordExpired
+                Case True
+                    objUser.PasswordExpired = 1
+                Case False
+                    objUser.PasswordExpired = 0
+            End Select
+            objUser.SetInfo()
+        Catch ex As Exception
+            Throw New Exception("Fehler bei SetUserOptions.", ex)
+        End Try
+    End Sub
+#End Region
+
+#Region "SetUserPassword"
+    Private Declare Function NetUserSetInfo Lib "netapi32.dll" (<MarshalAs(UnmanagedType.LPWStr)> ByVal servername As String, <MarshalAs(UnmanagedType.LPWStr)> ByVal username As String, ByVal level As Integer, ByRef buf As USER_INFO_1003, ByRef parm_err As Integer) As Integer
+    '__in   LPCWSTR servername,
+    '__in   LPCWSTR username,
+    '__in   DWORD level,
+    '__in   LPBYTE buf,
+    '__out  LPDWORD parm_err
+
+    Public Shared Sub SetUserPassword(ByVal UserName As String, ByVal Password As String)
+        Dim myUserInfo1003 As USER_INFO_1003
+        myUserInfo1003.Password = Password
+
+        Dim ErrorCode As Integer = NetUserSetInfo(Nothing, UserName, 1003, myUserInfo1003, Nothing)
+        If Not ErrorCode = 0 Then Throw New Exception("API-Kommuniktationsfehler bei NetUserSetInfo: " & ErrorCode.ToString)
+    End Sub
+#End Region
+
+#Region "Private Helper Functions"
     Private Declare Function NetUserGetInfo Lib "netapi32.dll" (<MarshalAs(UnmanagedType.LPWStr)> ByVal servername As String, <MarshalAs(UnmanagedType.LPWStr)> ByVal username As String, ByVal level As Integer, ByRef bufptr As IntPtr) As Integer
     '__in   LPCWSTR servername,
     '__in   LPCWSTR username,

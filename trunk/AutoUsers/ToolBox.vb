@@ -38,28 +38,6 @@ Public Class ToolBox
         Return True
     End Function
 
-    'Public Shared Function generatePassword(ByVal PasswordLength As Integer)
-    '    'alte Version - Backup
-
-    '    'Generiert selbstständig ein Kennwort aus einem vorgegenbenen Zeichenvorrat.
-
-    '    Try
-    '        Dim PasswordChars() As String = My.Settings.AutoPasswordChars.Split("|")
-
-    '        Dim newPassword As String = Nothing
-
-    '        For n As Integer = 1 To PasswordLength
-    '            Dim CharSetID As Byte = (n - 1) Mod PasswordChars.Length 'gibt an, aus welchem Zeichenvorrat ein Zeichen kommt
-    '            Dim CharacterID As Integer = Int(Rnd() * PasswordChars(CharSetID).Length)
-    '            newPassword &= PasswordChars(CharSetID).Substring(CharacterID, 1)
-    '        Next
-
-    '        Return newPassword
-    '    Catch ex As Exception
-    '        Throw New Exception("Ein Kennwort konnte nicht generiert werden. Möglicherweise haben Sie eine ungültige Zeichenfolge in den Einstellungen eingegeben. Fehler: " & ex.Message, ex)
-    '    End Try
-    'End Function
-
     Public Shared Function generatePassword(ByVal PasswordLength As Integer)
         'Generiert selbstständig ein Kennwort aus einem vorgegenbenen Zeichenvorrat.
 
@@ -88,6 +66,16 @@ Public Class ToolBox
         Catch ex As Exception
             Throw New Exception("Ein Kennwort konnte nicht generiert werden. Möglicherweise haben Sie eine ungültige Zeichenfolge in den Einstellungen eingegeben. Fehler: " & ex.Message, ex)
         End Try
+    End Function
+
+    Public Shared Function getPassword() As String
+        Dim newPassword As String = Nothing
+        If My.Settings.setDefaultPassword Then
+            newPassword = My.Settings.DefaultPassword
+        ElseIf My.Settings.autoGeneratePasswords Then
+            newPassword = ToolBox.generatePassword(My.Settings.AutoPasswordLength)
+        End If
+        Return newPassword
     End Function
 
     Public Shared Function randomizeCharOrder(ByVal InString As String) As String
