@@ -1,0 +1,60 @@
+﻿<!--
+Copyright (c) 2010, 2011 Felix Freiberger
+felix@familie-freiberger.net
+
+This file is part of AutoUsers.
+
+AutoUsers is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+AutoUsers is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along with AutoUsers.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<Page x:Class="pageStart"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="450"
+      Title="Startseite">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Name="rowDescription" Height="2*"/>
+            <RowDefinition Name="rowLicense" Height="80" />
+            <RowDefinition Name="rowButtons" Height="50" />
+        </Grid.RowDefinitions>
+        <Grid Name="gridWelcome" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="20" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Name="txtWelcome" Grid.Row="0" Text="Willkommen zu AutoUsers!" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBlock Name="txtVersion" Grid.Row="1" Text="Versionsinformationen" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <ScrollViewer Grid.Row="2" Margin="2">
+                <TextBlock Name="txtDescription" Text="AutoUsers ist ein Programm, mit dem Sie Windows-Benutzerkonten verwalten können. Sie können sowohl manuelle Operationen durchführen als auch eine automatische Synchronisation mit einer Benutzerliste durchführen." TextWrapping="Wrap" Margin="2"/>                
+            </ScrollViewer>
+        </Grid>
+        <GroupBox Name="gbLicense" Header="Lizenz und rechtliche Informationen" Grid.Row="1" Margin="2" >
+            <Grid Name="gridLicense">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="AutoUsers ist freie Software und unterliegt einem Haftungsausschluss. Für weitere Informationen klicken Sie auf den Button rechts." TextWrapping="Wrap" HorizontalAlignment="Left" />
+                <Button Name="btnShowLicenseWebSite" Grid.Column="1" Margin="5" Click="OpenLicenseURL">
+                    <TextBlock Text="Weitere Informationen" TextWrapping="Wrap" />
+                </Button>
+            </Grid>
+        </GroupBox>
+        <Grid Name="gridButtons" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Button Name="btnShowSettings" Grid.Column="0" Margin="5" Content="Einstellungen" Click="GoToSettings" />
+            <Button Name="btnShowToolbox" Grid.Column="1" Margin="5" Content="Toolbox" Click="GoToToolbox" />
+            <Button Name="btnStartWizard" Grid.Column="2" Margin="5" Content="Listenabgleich starten" Click="GoToStep1" IsDefault="True" />
+        </Grid>
+    </Grid>
+</Page>

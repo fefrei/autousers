@@ -1,0 +1,126 @@
+C:\Users\Felix\AppData\Local\Temporary Projects\AutoUsers\bin\Debug\AutoUsers.exe
+C:\Users\Felix\AppData\Local\Temporary Projects\AutoUsers\bin\Debug\AutoUsers.pdb
+C:\Users\Felix\AppData\Local\Temporary Projects\AutoUsers\bin\Debug\AutoUsers.xml
+C:\Users\Felix\AppData\Local\Temporary Projects\AutoUsers\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Felix\AppData\Local\Temporary Projects\AutoUsers\obj\x86\Debug\MainWindow.baml
+C:\Users\Felix\AppData\Local\Temporary Projects\AutoUsers\obj\x86\Debug\MainWindow.g.vb
+C:\Users\Felix\AppData\Local\Temporary Projects\AutoUsers\obj\x86\Debug\Application.g.vb
+C:\Users\Felix\AppData\Local\Temporary Projects\AutoUsers\obj\x86\Debug\AutoUsers_MarkupCompile.cache
+C:\Users\Felix\AppData\Local\Temporary Projects\AutoUsers\obj\x86\Debug\AutoUsers.g.resources
+C:\Users\Felix\AppData\Local\Temporary Projects\AutoUsers\obj\x86\Debug\AutoUsers.Resources.resources
+C:\Users\Felix\AppData\Local\Temporary Projects\AutoUsers\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Felix\AppData\Local\Temporary Projects\AutoUsers\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Felix\AppData\Local\Temporary Projects\AutoUsers\obj\x86\Debug\AutoUsers.exe
+C:\Users\Felix\AppData\Local\Temporary Projects\AutoUsers\obj\x86\Debug\AutoUsers.xml
+C:\Users\Felix\AppData\Local\Temporary Projects\AutoUsers\obj\x86\Debug\AutoUsers.pdb
+C:\Users\Felix\documents\visual studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\AutoUsers.exe
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\bin\Debug\AutoUsers.exe
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\MainWindow.baml
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\MainWindow.g.vb
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\Application.g.vb
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\AutoUsers_MarkupCompile.cache
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\AutoUsers.g.resources
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\AutoUsers.Resources.resources
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\Application.baml
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\pageStart.baml
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\pageStart.g.vb
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\pageSettings.baml
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\pageSettings.g.vb
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\pageStep1ChooseGroup.baml
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\pageStep1ChooseGroup.g.vb
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\pageStep2ChooseFile.baml
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\pageStep2ChooseFile.g.vb
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\pageStep3CompareLists.baml
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\pageStep3CompareLists.g.vb
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\pageStep4Execute.baml
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\pageStep4Execute.g.vb
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\bin\Debug\AutoUsers.exe.config
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\AutoUsers_MarkupCompile.lref
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\pageStep5Results.baml
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\pageStep5Results.g.vb
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\bin\Debug\AutoUsers.xml
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\AutoUsers.xml
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\pageLicense.baml
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\pageLicense.g.vb
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\bin\Debug\COPYING.txt
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\bin\Debug\AutoUsers.pdb
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\obj\x86\Debug\AutoUsers.pdb
+C:\Users\Felix\Documents\Visual Studio 2010\Projects\AutoUsers\AutoUsers\bin\Debug\BAT_TEMPLATE.bat
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Debug\AutoUsers.exe.config
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers.exe
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers.xml
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers.pdb
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Debug\BAT_TEMPLATE.bat
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Debug\COPYING.txt
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Debug\AutoUsers.exe
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Debug\AutoUsers.pdb
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Debug\AutoUsers.xml
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\MainWindow.baml
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageLicense.baml
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStart.baml
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep1ChooseGroup.baml
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep2ChooseFile.baml
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep3CompareLists.baml
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep4Execute.baml
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep5Results.baml
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\Application.baml
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\MainWindow.g.vb
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageLicense.g.vb
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageSettings.g.vb
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStart.g.vb
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep1ChooseGroup.g.vb
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep2ChooseFile.g.vb
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep3CompareLists.g.vb
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep4Execute.g.vb
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep5Results.g.vb
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\Application.g.vb
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers_MarkupCompile.cache
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers_MarkupCompile.lref
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageSettings.baml
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers.g.resources
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers.Resources.resources
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Public\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Debug\BAT_TEMPLATE.bat
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Debug\COPYING.txt
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Debug\AutoUsers.exe.config
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Debug\AutoUsers.exe
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Debug\AutoUsers.pdb
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Debug\AutoUsers.xml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\MainWindow.baml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageLicense.baml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStart.baml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep1ChooseGroup.baml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep2ChooseFile.baml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep3CompareLists.baml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep4Execute.baml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep5Results.baml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\Application.baml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\MainWindow.g.vb
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageLicense.g.vb
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageSettings.g.vb
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStart.g.vb
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep1ChooseGroup.g.vb
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep2ChooseFile.g.vb
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep3CompareLists.g.vb
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep4Execute.g.vb
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageStep5Results.g.vb
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\Application.g.vb
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers_MarkupCompile.cache
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers_MarkupCompile.lref
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageSettings.baml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers.g.resources
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers.Resources.resources
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers.exe
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers.xml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers.pdb
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageToolbox.baml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageToolbox.g.vb
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Debug\Changelog.txt
