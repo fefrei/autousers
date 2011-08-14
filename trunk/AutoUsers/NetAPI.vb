@@ -9,114 +9,44 @@
 
 
 Imports System.Runtime.InteropServices
+Imports System.DirectoryServices.AccountManagement
 
 Public Class NetAPI
-    'Diese Klasse enthält Funktionen, die auf die Network Management Functions zurückgreifen.
+    'Diese Klasse enthält Funktionen, die die folgende API benutzen: http://msdn.microsoft.com/en-us/magazine/cc135979.aspx
 
-#Region "Constants"
-    Private Const USER_PRIV_USER As Integer = 1
-#End Region
-
-#Region "Structures"
-    Private Structure LocalGroup_Info_0
-        <MarshalAs(UnmanagedType.LPWStr)> Dim GroupName As String
-    End Structure
-    'typedef struct _LOCALGROUP_INFO_0 {
-    '  LPWSTR lgrpi0_name;
-    '} LOCALGROUP_INFO_0, *PLOCALGROUP_INFO_0, *LPLOCALGROUP_INFO_0;
-
-    Private Structure LOCALGROUP_MEMBERS_INFO_3
-        <MarshalAs(UnmanagedType.LPWStr)> Dim DomainAndName As String
-    End Structure
-    'typedef struct _LOCALGROUP_MEMBERS_INFO_3 {
-    '  LPWSTR lgrmi3_domainandname;
-    '} LOCALGROUP_MEMBERS_INFO_3;
-
-    Private Structure USER_INFO_1
-        <MarshalAs(UnmanagedType.LPWStr)> Dim UserName As String
-        <MarshalAs(UnmanagedType.LPWStr)> Dim Password As String
-        Dim PasswordAge As Integer
-        Dim Privileges As Integer
-        <MarshalAs(UnmanagedType.LPWStr)> Dim HomeDirectory As String
-        <MarshalAs(UnmanagedType.LPWStr)> Dim Comment As String
-        Dim Flags As Integer
-        <MarshalAs(UnmanagedType.LPWStr)> Dim ScriptPath As String
-    End Structure
-    'typedef struct _USER_INFO_1 {
-    '  LPWSTR usri1_name;
-    '  LPWSTR usri1_password;
-    '  DWORD  usri1_password_age;
-    '  DWORD  usri1_priv;
-    '  LPWSTR usri1_home_dir;
-    '  LPWSTR usri1_comment;
-    '  DWORD  usri1_flags;
-    '  LPWSTR usri1_script_path;
-    '} USER_INFO_1, *PUSER_INFO_1, *LPUSER_INFO_1;
-
-
-    Private Structure USER_INFO_1003
-        <MarshalAs(UnmanagedType.LPWStr)> Dim Password As String
-    End Structure
-    'typedef struct _USER_INFO_1003 {
-    '  LPWSTR usri1003_password;
-    '} USER_INFO_1003, *PUSER_INFO_1003, *LPUSER_INFO_1003;#End Region
-#End Region
 
 #Region "GetGroupNames"
-    Private Declare Function NetLocalGroupEnum Lib "netapi32.dll" (<MarshalAs(UnmanagedType.LPWStr)> ByVal servername As String, ByVal level As Integer, ByRef bufptr As IntPtr, ByVal prefmaxlen As Integer, ByRef entriesread As Integer, ByRef totalentries As Integer, ByRef resumhandle As Integer) As Integer
-    '__in     LPCWSTR servername,
-    '__in     DWORD level,
-    '__out    LPBYTE *bufptr,
-    '__in     DWORD prefmaxlen,
-    '__out    LPDWORD entriesread,
-    '__out    LPDWORD totalentries,
-    '__inout  PDWORD_PTR resumehandle
-
-
     Public Shared Function GetGroupNames() As List(Of String)
-        'Gibt eine Liste der Namen der lokalen Gruppen aus.
-        Dim ResultPtr As IntPtr
-        Dim EntriesRead As Integer
-        Dim TotalEntries As Integer
-        Dim ResumeHandle As Integer
-        Dim ErrorCode As Integer = NetLocalGroupEnum(Nothing, 0, ResultPtr, &HFFFFFFFF, EntriesRead, TotalEntries, ResumeHandle)
-        If Not ErrorCode = 0 Then Throw New Exception("API-Kommuniktationsfehler bei NetLocalGroupEnum: " & ErrorCode.ToString)
+        'Gibt die vorhandenen Gruppen aus.
 
-        Dim Result As New List(Of String)
-        For n As Integer = 0 To TotalEntries - 1
-            Dim ThisGroupInfo As LocalGroup_Info_0 = Marshal.PtrToStructure(CType(ResultPtr.ToInt32 + Marshal.SizeOf(GetType(LocalGroup_Info_0)) * n, IntPtr), GetType(LocalGroup_Info_0)) 'komplexes Konstrukt, da ein Array zurückgegeben wurde
-            Result.Add(ThisGroupInfo.GroupName)
+        Dim GroupNames = New List(Of String)
+
+        Dim group = New GroupPrincipal(CurrentState.CurrentContext)
+
+        Dim pS = New PrincipalSearcher(group)
+        Dim results = pS.FindAll
+
+        For Each item In results
+            GroupNames.Add(item.ToString)
         Next
 
-        Return Result
+        Return GroupNames
     End Function
 #End Region
 
 #Region "GetUsersInGroup"
-    Private Declare Function NetLocalGroupGetMembers Lib "netapi32.dll" (<MarshalAs(UnmanagedType.LPWStr)> ByVal servername As String, <MarshalAs(UnmanagedType.LPWStr)> ByVal localgroupname As String, ByVal level As Integer, ByRef bufptr As IntPtr, ByVal prefmaxlen As Integer, ByRef entriesread As Integer, ByRef totalentries As Integer, ByRef resumhandle As Integer) As Integer
-    '__in     LPCWSTR servername,
-    '__in     LPCWSTR localgroupname,
-    '__in     DWORD level,
-    '__out    LPBYTE *bufptr,
-    '__in     DWORD prefmaxlen,
-    '__out    LPDWORD entriesread,
-    '__out    LPDWORD totalentries,
-    '__inout  PDWORD_PTR resumehandle
-
 
     Public Shared Function GetUsersInGroup(ByVal GroupName As String) As List(Of String)
-        'Gibt eine Liste der Namen der Benutzer in einer lokalen Gruppe aus.
-        Dim ResultPtr As IntPtr
-        Dim EntriesRead As Integer
-        Dim TotalEntries As Integer
-        Dim ResumeHandle As Integer
-        Dim ErrorCode As Integer = NetLocalGroupGetMembers(Nothing, GroupName, 3, ResultPtr, &HFFFFFFFF, EntriesRead, TotalEntries, ResumeHandle)
-        If Not ErrorCode = 0 Then Throw New Exception("API-Kommuniktationsfehler bei NetLocalGroupGetMembers: " & ErrorCode.ToString)
+        'Gibt eine Liste der Namen der Benutzer in einer Gruppe aus.
+        Dim group = GroupPrincipal.FindByIdentity(CurrentState.CurrentContext, GroupName)
+        Dim members = group.GetMembers
 
-        Dim Result As New List(Of String)
-        For n As Integer = 0 To TotalEntries - 1
-            Dim ThisGroupInfo As LOCALGROUP_MEMBERS_INFO_3 = Marshal.PtrToStructure(CType(ResultPtr.ToInt32 + Marshal.SizeOf(GetType(LOCALGROUP_MEMBERS_INFO_3)) * n, IntPtr), GetType(LOCALGROUP_MEMBERS_INFO_3))
-            Result.Add(ThisGroupInfo.DomainAndName.Substring(ThisGroupInfo.DomainAndName.IndexOf("\") + 1))
+        Dim Result = New List(Of String)
+
+        For Each item In members
+            If TypeOf item Is UserPrincipal Then
+                Result.Add(item.ToString)
+            End If
         Next
 
         Return Result
@@ -124,168 +54,96 @@ Public Class NetAPI
 #End Region
 
 #Region "CreateUser"
-    Private Declare Function NetUserAdd Lib "netapi32.dll" (<MarshalAs(UnmanagedType.LPWStr)> ByVal servername As String, ByVal level As Integer, ByRef buf As USER_INFO_1, ByRef parm_err As Integer) As Integer
-    '__in   LMSTR servername,
-    '__in   DWORD level,
-    '__in   LPBYTE buf,
-    '__out  LPDWORD parm_err
-
-
     Public Shared Sub CreateUser(ByVal UserName As String, ByVal Password As String, ByVal ExpirePassword As Boolean)
         'Creates a new user.
 
-        Dim NewUserInfo As New USER_INFO_1
-        With NewUserInfo
-            .UserName = UserName
-            .Password = Password
-            .Privileges = USER_PRIV_USER
-        End With
+        Dim user As New UserPrincipal(CurrentState.CurrentContext, UserName, Password, True)
 
-        Dim ErrorCode As Integer = NetUserAdd(Nothing, 1, NewUserInfo, Nothing)
-        If Not ErrorCode = 0 Then Throw New Exception("API-Kommuniktationsfehler bei NetUserAdd: " & ErrorCode.ToString)
+        If (ExpirePassword) Then
+            user.ExpirePasswordNow()
+        End If
 
-        Try
-            If ExpirePassword Then
-                Dim objUser = GetObject("WinNT://" & My.Computer.Name & "/" & UserName & ",user")
-                objUser.PasswordExpired = 1
-                objUser.SetInfo()
-            End If
-        Catch ex As Exception
-            Throw New Exception("Das Kennwort des Benutzers konnte nicht als abgelaufen markiert werden. Der Benutzer kann sich wahrscheinlich anmelden, ohne das Kennwort zu ändern.", ex)
-        End Try
+        user.Save()
     End Sub
 #End Region
 
 #Region "DeleteUser"
-    Private Declare Function NetUserDel Lib "netapi32.dll" (<MarshalAs(UnmanagedType.LPWStr)> ByVal servername As String, <MarshalAs(UnmanagedType.LPWStr)> ByVal username As String) As Integer
-    '__in  LPCWSTR servername,
-    '__in  LPCWSTR username
-
-
     Public Shared Sub DeleteUser(ByVal UserName As String)
         'Deletes a user account.
 
-        Dim ErrorCode As Integer = NetUserDel(Nothing, UserName)
-        If Not ErrorCode = 0 Then Throw New Exception("API-Kommuniktationsfehler bei NetUserDel: " & ErrorCode.ToString)
+        Dim user = UserPrincipal.FindByIdentity(CurrentState.CurrentContext, UserName)
+        user.Delete()
     End Sub
 #End Region
 
 #Region "AddUserToGroup"
-    Private Declare Function NetLocalGroupAddMembers Lib "netapi32.dll" (<MarshalAs(UnmanagedType.LPWStr)> ByVal servername As String, <MarshalAs(UnmanagedType.LPWStr)> ByVal groupname As String, ByVal level As Integer, ByRef buf As LOCALGROUP_MEMBERS_INFO_3, ByVal totalentries As Integer) As Integer
-    '__in  LPCWSTR servername,
-    '__in  LPCWSTR groupname,
-    '__in  DWORD level,
-    '__in  LPBYTE buf,
-    '__in  DWORD totalentries
-
     Public Shared Sub AddUserToGroup(ByVal UserName As String, ByVal GroupName As String)
-        Dim UserStruct As LOCALGROUP_MEMBERS_INFO_3
-        UserStruct.DomainAndName = UserName
+        Dim group = GroupPrincipal.FindByIdentity(CurrentState.CurrentContext, GroupName)
+        Dim user = UserPrincipal.FindByIdentity(CurrentState.CurrentContext, UserName)
 
-        Dim ErrorCode As Integer = NetLocalGroupAddMembers(Nothing, GroupName, 3, UserStruct, 1)
-        If Not ErrorCode = 0 Then Throw New Exception("API-Kommuniktationsfehler bei NetLocalGroupAddMembers: " & ErrorCode.ToString)
+        group.Members.Add(user)
+        group.Save()
     End Sub
 #End Region
 
 #Region "SetAccountDisabled"
     Public Shared Sub SetAccountDisabled(ByVal UserName As String, Optional ByVal IsDisabled As Boolean = True)
-        Try
-            Dim objUser = GetObject("WinNT://" & My.Computer.Name & "/" & UserName & ",user")
-            objUser.AccountDisabled = IsDisabled
-            objUser.SetInfo()
-        Catch ex As Exception
-            Throw New Exception("Der Benutzer kann nicht deaktiviert werden. Der Benutzer kann sich wahrscheinlich immer noch anmelden.", ex)
-        End Try
+        Dim user = UserPrincipal.FindByIdentity(CurrentState.CurrentContext, UserName)
+
+        user.Enabled = Not IsDisabled
+
+        user.Save()
+    End Sub
+#End Region
+
+#Region "SetHomeDir"
+    Public Shared Sub SetHomeDir(ByVal UserName As String, ByVal NewHomeDir As String)
+        Dim user = UserPrincipal.FindByIdentity(CurrentState.CurrentContext, UserName)
+
+        user.HomeDirectory = NewHomeDir
+
+        user.Save()
     End Sub
 #End Region
 
 #Region "DoesUserExist"
     Public Shared Function DoesUserExist(ByVal UserName As String) As Integer
-        'holt UserInfo, wenn das fehlschlägt, gibt es den Benutzer nicht
+        Dim user = UserPrincipal.FindByIdentity(CurrentState.CurrentContext, UserName)
 
-        Dim ResultPtr As IntPtr
-        Dim ErrorCode As Integer = NetUserGetInfo(Nothing, UserName, 1, ResultPtr)
-
-        Select Case ErrorCode
-            Case 0
-                Return True
-            Case 2221
-                Return False 'Fehlercode 2221 = Benutzername nicht gefunden
-            Case Else
-                Throw New Exception("API-Kommuniktationsfehler bei NetUserGetInfo: " & ErrorCode.ToString)
-        End Select
-
+        Return user IsNot Nothing
     End Function
 #End Region
 
 #Region "UserOptions"
-
     Public Shared Function GetUserOptions(ByVal UserName As String) As UserOptions
-        Try
-            Dim ReturnValue = New UserOptions()
+        Dim ReturnValue = New UserOptions()
 
-            Dim objUser = GetObject("WinNT://" & My.Computer.Name & "/" & UserName & ",user")
+        Dim user = UserPrincipal.FindByIdentity(CurrentState.CurrentContext, UserName)
 
-            ReturnValue.UserIsDisabled = objUser.AccountDisabled
-            ReturnValue.PasswordExpired = objUser.PasswordExpired = 1
+        ReturnValue.UserIsDisabled = Not user.Enabled
+        ReturnValue.PasswordExpired = Nothing 'Reading not supported
 
-            Return ReturnValue
-        Catch ex As Exception
-            Throw New Exception("Fehler bei GetUserOptions.", ex)
-        End Try
+        Return ReturnValue
     End Function
 
     Public Shared Sub SetUserOptions(ByVal UserName As String, ByVal newUserOptions As UserOptions)
-        Try
-            If newUserOptions.Password IsNot Nothing Then
-                SetUserPassword(UserName, newUserOptions.Password)
+        Dim user = UserPrincipal.FindByIdentity(CurrentState.CurrentContext, UserName)
+
+        If newUserOptions.Password IsNot Nothing Then
+            user.SetPassword(newUserOptions.Password)
+        End If
+
+        If newUserOptions.PasswordExpired IsNot Nothing Then
+            If newUserOptions.PasswordExpired Then
+                user.ExpirePasswordNow()
+            Else
+                user.RefreshExpiredPassword()
             End If
+        End If
 
-            Dim objUser = GetObject("WinNT://" & My.Computer.Name & "/" & UserName & ",user")
+        user.Enabled = Not newUserOptions.UserIsDisabled
 
-            objUser.AccountDisabled = newUserOptions.UserIsDisabled
-            Select Case newUserOptions.PasswordExpired
-                Case True
-                    objUser.PasswordExpired = 1
-                Case False
-                    objUser.PasswordExpired = 0
-            End Select
-            objUser.SetInfo()
-        Catch ex As Exception
-            Throw New Exception("Fehler bei SetUserOptions.", ex)
-        End Try
+        user.Save()
     End Sub
-#End Region
-
-#Region "SetUserPassword"
-    Private Declare Function NetUserSetInfo Lib "netapi32.dll" (<MarshalAs(UnmanagedType.LPWStr)> ByVal servername As String, <MarshalAs(UnmanagedType.LPWStr)> ByVal username As String, ByVal level As Integer, ByRef buf As USER_INFO_1003, ByRef parm_err As Integer) As Integer
-    '__in   LPCWSTR servername,
-    '__in   LPCWSTR username,
-    '__in   DWORD level,
-    '__in   LPBYTE buf,
-    '__out  LPDWORD parm_err
-
-    Public Shared Sub SetUserPassword(ByVal UserName As String, ByVal Password As String)
-        Dim myUserInfo1003 As USER_INFO_1003
-        myUserInfo1003.Password = Password
-
-        Dim ErrorCode As Integer = NetUserSetInfo(Nothing, UserName, 1003, myUserInfo1003, Nothing)
-        If Not ErrorCode = 0 Then Throw New Exception("API-Kommuniktationsfehler bei NetUserSetInfo: " & ErrorCode.ToString)
-    End Sub
-#End Region
-
-#Region "Private Helper Functions"
-    Private Declare Function NetUserGetInfo Lib "netapi32.dll" (<MarshalAs(UnmanagedType.LPWStr)> ByVal servername As String, <MarshalAs(UnmanagedType.LPWStr)> ByVal username As String, ByVal level As Integer, ByRef bufptr As IntPtr) As Integer
-    '__in   LPCWSTR servername,
-    '__in   LPCWSTR username,
-    '__in   DWORD level,
-    '__out  LPBYTE *bufptr
-
-    Private Shared Function GetUserInfo(ByVal UserName As String) As USER_INFO_1
-        Dim ResultPtr As IntPtr
-        Dim ErrorCode As Integer = NetUserGetInfo(Nothing, UserName, 1, ResultPtr)
-        If Not ErrorCode = 0 Then Throw New Exception("API-Kommuniktationsfehler bei NetUserGetInfo: " & ErrorCode.ToString)
-        Return Marshal.PtrToStructure(ResultPtr, GetType(USER_INFO_1))
-    End Function
 #End Region
 End Class

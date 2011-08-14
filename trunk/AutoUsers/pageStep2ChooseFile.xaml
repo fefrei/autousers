@@ -19,18 +19,23 @@ You should have received a copy of the GNU General Public License along with Aut
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-            <RowDefinition Height="55"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="30" />
             <RowDefinition />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Schritt 2: Auswahl der Datei" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <TextBlock Grid.Row="1" Text="Bitte wählen Sie nun die Datei aus, in der die aktuelle Benutzerliste gespeichert ist. Die Datei muss kommagetrennte Namen enthalten." TextWrapping="Wrap" Margin="2"/>
-        <Button Name="btnOpenFile" Grid.Row="2" Content="Datei öffnen" Margin="4" IsDefault="True" />
-        <ScrollViewer Name="scrollFileResult" Grid.Row="3">
+        <ComboBox Name="comboFileDriver" Grid.Row="2" SelectedIndex="0" Margin="2">
+            <ComboBoxItem Content="nur Benutzernamen einlesen, auf Gültigkeit prüfen" />
+            <ComboBoxItem Content="aus allen Einträgen einer Zeile Benutzernamen bauen; Fehler korrigieren" />
+        </ComboBox>
+        <Button Name="btnOpenFile" Grid.Row="3" Content="Datei öffnen" Margin="4" IsDefault="True" />
+        <ScrollViewer Name="scrollFileResult" Grid.Row="4">
             <TextBlock Name="txtResults" Margin="2" TextWrapping="Wrap">Es wurde noch keine Datei geöffnet.</TextBlock>
         </ScrollViewer>
-        <ProgressBar Name="prgFileAnalyzing" Grid.Row="3" Height="20" Width="200"  IsIndeterminate="True" Visibility="Collapsed"/>
-        <Button Name="btnConfirmList" Grid.Row="4" Margin="5" Content="Benutzerliste bestätigen" IsEnabled="False" />
+        <ProgressBar Name="prgFileAnalyzing" Grid.Row="4" Height="20" Width="200"  IsIndeterminate="True" Visibility="Collapsed"/>
+        <Button Name="btnConfirmList" Grid.Row="5" Margin="5" Content="Benutzerliste bestätigen" IsEnabled="False" />
     </Grid>
 </Page>

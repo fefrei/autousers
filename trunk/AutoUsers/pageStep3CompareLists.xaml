@@ -13,19 +13,33 @@ You should have received a copy of the GNU General Public License along with Aut
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:p="clr-namespace:AutoUsers"       
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="450"
-      Title="Schritt 3: Benutzerveränderungen">
+      Title="Schritt 3: Benutzerveränderungen" xmlns:my="clr-namespace:AutoUsers">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-            <RowDefinition Height="55"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="70"/>
             <RowDefinition />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Schritt 3: Benutzeränderungen" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <TextBlock Grid.Row="1" Text="In diesem Schritt sehen Sie, welche Benutzer angelegt werden (grün) und welche gelöscht werden (rot). Hinweis: Schon existierende Nutzer, die neu angelegt werden sollen, werden stattdessen nur der Gruppe hinzugefügt." TextWrapping="Wrap" Margin="2"/>
-        <Grid Name="gridUserChanges" Grid.Row="2" Visibility="Collapsed">
+        <TextBlock Grid.Row="1" Text="In diesem Schritt sehen Sie, welche Benutzer angelegt werden (grün) und welche gelöscht werden (rot)." TextWrapping="Wrap" Margin="2"/>
+        <StackPanel Grid.Row="2">
+            <RadioButton IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=syncModeSync}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Listen vergleichen, dann " />
+                    <CheckBox Content="neue hinzufügen " IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=syncModeSyncAdd}" />
+                    <CheckBox Content="alte löschem" IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=syncModeSyncDelete}" />
+                </StackPanel>
+            </RadioButton>
+            <RadioButton Content="alle Benutzer die in der Liste stehen hinzufügen" IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=syncModeAddAll}" />
+            <RadioButton Content="alle Benutzer die in der Liste stehen löschen" IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=syncModeDeleteAll}" />
+            <Button Name="btnBuildList" Content="Liste erneut erzeugen" />
+        </StackPanel>
+        <Grid Name="gridUserChanges" Grid.Row="3" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -39,7 +53,7 @@ You should have received a copy of the GNU General Public License along with Aut
             <TextBlock Name="txtUserCreation" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Die Liste wurde noch nicht erstellt."/>
             <TextBlock Name="txtUserDeletion" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Die Liste wurde noch nicht erstellt."/>
         </Grid>
-        <ProgressBar Name="prgFileAnalyzing" Grid.Row="2" Height="20" Width="200" IsIndeterminate="True" Visibility="Visible"/>
-        <Button Name="btnConfirmChanges" Grid.Row="3" Margin="5" Content="Benutzerliste bestätigen" IsEnabled="False" />
+        <ProgressBar Name="prgFileAnalyzing" Grid.Row="3" Height="20" Width="200" IsIndeterminate="True" Visibility="Visible"/>
+        <Button Name="btnConfirmChanges" Grid.Row="4" Margin="5" Content="Benutzerliste bestätigen" IsEnabled="False" />
     </Grid>
 </Page>

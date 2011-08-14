@@ -57,6 +57,19 @@ You should have received a copy of the GNU General Public License along with Aut
                             </StackPanel>
                         </GroupBox>
                         <CheckBox Margin="2" Content="Kennwörter müssen bei der ersten Anmeldung geändert werden" IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=ExpireNewPasswords}" />
+                        <GroupBox Header="Verzeichnisse">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <CheckBox Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Content="Home-Verzeichnis"  IsChecked="{Binding Source={x:Static p:MySettings.Default}, Path=setHomeDir}" />
+                                <TextBox Grid.Column="1" Grid.Row="0" ToolTip="$USER wird durch den Benutzernamen ersetzt" Text="{Binding Source={x:Static p:MySettings.Default}, Path=HomeDir}" />
+                            </Grid>
+                        </GroupBox> 
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="Benutzer löschen" Margin="2">

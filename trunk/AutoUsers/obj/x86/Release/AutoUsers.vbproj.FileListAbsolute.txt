@@ -109,3 +109,5 @@ C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Release\GenerateR
 C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Release\Changelog.txt
 C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Release\pageToolbox.baml
 C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Release\pageToolbox.g.vb
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Release\pageSetContext.baml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Release\pageSetContext.g.vb

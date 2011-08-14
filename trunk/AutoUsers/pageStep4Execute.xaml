@@ -27,7 +27,7 @@ You should have received a copy of the GNU General Public License along with Aut
         <TextBlock Grid.Row="0" Text="Auftragsübersicht" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
             <GroupBox Name="gbPreviewChanges" Header="Übersicht" Grid.Row="1">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <TextBlock TextWrapping="Wrap">Die lokale Benutzergruppe <Hyperlink Name="linkGroupName" NavigateUri="pageStep1ChooseGroup.xaml" /> wird mit der Benutzerliste <Hyperlink Name="linkListName" NavigateUri="pageStep2ChooseFile.xaml" /> abgeglichen. Dabei werden <Hyperlink Name="linkNewUsers" NavigateUri="pageStep3CompareLists.xaml" /> Benutzer angelegt und <Hyperlink Name="linkOldUsers" NavigateUri="pageStep3CompareLists.xaml" /> Benutzer gelöscht. Möchten Sie die <Hyperlink NavigateUri="pageSettings.xaml">Einstellungen ändern</Hyperlink>?</TextBlock>
+                    <TextBlock TextWrapping="Wrap">Die Benutzergruppe <Hyperlink Name="linkGroupName" NavigateUri="pageStep1ChooseGroup.xaml" /> wird mit der Benutzerliste <Hyperlink Name="linkListName" NavigateUri="pageStep2ChooseFile.xaml" /> abgeglichen. Dabei werden <Hyperlink Name="linkNewUsers" NavigateUri="pageStep3CompareLists.xaml" /> Benutzer angelegt und <Hyperlink Name="linkOldUsers" NavigateUri="pageStep3CompareLists.xaml" /> Benutzer gelöscht. Möchten Sie die <Hyperlink NavigateUri="pageSettings.xaml">Einstellungen ändern</Hyperlink>?</TextBlock>
                 </ScrollViewer>
             </GroupBox>
             <GroupBox Header="Protokoll" Grid.Row="2">

@@ -11,3 +11,9 @@
 2.1.0.0
  - Toolbox hinzugefügt
  - noch weniger sprachliche Fehler
+
+2.2.0.0
+ - API gewechselt
+ - Unterstützung für AD
+ - automatisches Erzeugen der Benutzernamen
+ - setzen des Home-Verzeichnisses

@@ -16,6 +16,7 @@ Class pageStep2ChooseFile
 
     Class FileAnalysisResult
         Public FilePath As String
+        Public usedDriver As String
         Public UserNames As List(Of String)
         Public ErrorsEncountered As Boolean
         Public ErrorList As List(Of String)
@@ -26,6 +27,16 @@ Class pageStep2ChooseFile
             ErrorList = New List(Of String)
         End Sub
     End Class
+
+    Structure FileAnalysisArgument
+        Public FilePath As String
+        Public selectedDriver As Byte
+
+        Sub New(ByVal newFilePathas As String, ByVal newSelectedDriver As Byte)
+            FilePath = newFilePathas
+            selectedDriver = newSelectedDriver
+        End Sub
+    End Structure
 
     Private Sub btnOpenFile_Click(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs) Handles btnOpenFile.Click
         Dim myOpenFileDialog As New Microsoft.Win32.OpenFileDialog() With {.Filter = "Kommagetrennte Dateien|*.csv|Textdateien|*.txt|Alle Dateien|*"}
@@ -44,19 +55,29 @@ Class pageStep2ChooseFile
             AddHandler .RunWorkerCompleted, AddressOf ProcessAnalysisResults
         End With
 
-        AnalyzeFileBackgroundWorker.RunWorkerAsync(FilePath)
+        AnalyzeFileBackgroundWorker.RunWorkerAsync(New FileAnalysisArgument(FilePath, comboFileDriver.SelectedIndex))
     End Sub
 
     Private Sub DoAnalyzeFile(ByVal sender As Object, ByVal e As ComponentModel.DoWorkEventArgs)
-        Dim SeparatingCharacters As String = ";," & vbCr & vbLf
+        Dim SeparatingCharacters As String
 
         Dim ReturnValue As New FileAnalysisResult
 
         Debug.WriteLine("Reading file...")
-        ReturnValue.FilePath = e.Argument
+        ReturnValue.FilePath = CType(e.Argument, FileAnalysisArgument).FilePath
+        ReturnValue.usedDriver = CType(e.Argument, FileAnalysisArgument).selectedDriver
         Dim FileStream As New IO.StreamReader(ReturnValue.FilePath, System.Text.Encoding.Default)
         Dim FileContent() As Char = FileStream.ReadToEnd.ToCharArray
         FileStream.Close()
+
+        Select Case ReturnValue.usedDriver
+            Case 0
+                SeparatingCharacters = ";," & vbCr & vbLf
+            Case 1
+                SeparatingCharacters = vbCr & vbLf 'nicht bei Zeilenwechseln splitten
+            Case Else
+                Throw New NotImplementedException
+        End Select
 
         Dim Buffer As String = "" 'Hier kommen die Zeichen einzeln rein, bis der Name komplett ist
 
@@ -65,16 +86,8 @@ Class pageStep2ChooseFile
             If SeparatingCharacters.Contains(FileContent(n)) Then
                 'Trennzeichen gefunden
                 If Buffer.Length > 0 Then 'Nur wen im Buffer wirklich schon Inhalt ist
-                    If ToolBox.IsUserNameValid(Buffer) Then 'Nur wenn der Name gültig ist
-                        ReturnValue.UserNames.Add(Buffer)
-                        Buffer = ""
-                    Else
-                        'Fehler speichern
-                        ReturnValue.ErrorsEncountered = True
-                        Debug.WriteLine("ERROR: " & Buffer & " is invalid.")
-                        ReturnValue.ErrorList.Add("WARNUNG: Der Benutzername " & Buffer & " ist ungültig und wurde ignoriert.")
-                        Buffer = ""
-                    End If
+                    ReturnValue.UserNames.Add(Buffer)
+                    Buffer = ""
                 End If
             Else
                 'Inhaltszeichen gefunden
@@ -88,8 +101,55 @@ Class pageStep2ChooseFile
             Debug.WriteLine("NOTE: No separating character after the last name found. It was manually separated. Last Name: " & Buffer)
         End If
 
+        For n As Integer = ReturnValue.UserNames.Count - 1 To 0 Step -1
+            Dim UserName = ReturnValue.UserNames.Item(n)
+
+            If ReturnValue.usedDriver = 1 Then
+                UserName = UserName.Replace("Ä", "AE").Replace("Ö", "OE").Replace("Ü", "ÜE")
+                UserName = UserName.Replace("ä", "ae").Replace("ö", "oe").Replace("ü", "ue")
+                UserName = UserName.Replace("ß", "ss")
+                UserName = ToolBox.RemoveAccentMarks(UserName)
+
+                'verbotene Zeichen am Anfang entfernen
+                Do Until UserName.Length = 0 OrElse Char.IsLetterOrDigit(UserName.ToCharArray()(0))
+                    UserName.Remove(0, 1)
+                Loop
+
+                Dim FirstSeparationIndex As Integer = 0 'Index, der speichert, wo das erste Trennzeichen entfernt wurde (um den Beginn des Nachnamens zu ermitteln)
+
+                'verbotene Zeichen komplett entfernen
+                For m As Integer = UserName.Length - 1 To 0 Step -1
+                    If Not Char.IsLetterOrDigit(UserName.ToCharArray()(m)) Then
+                        UserName = UserName.Remove(m, 1)
+                        FirstSeparationIndex = m 'der letzte Wert, der hier hereingeschrieben wird, gilt
+                    End If
+                Next
+
+                'Vornamen auf 1 Buchstaben kürzen
+                If UserName.Length > 20 And FirstSeparationIndex > 0 Then
+                    UserName = UserName.Remove(1, FirstSeparationIndex - 1)
+                End If
+
+                'Notlösung zum Kürzen des Namens
+                If UserName.Length > 20 Then
+                    UserName = UserName.Substring(0, 20)
+                End If
+            End If
+
+            If Not ToolBox.IsUserNameValid(UserName) Then
+                'Fehler speichern
+                ReturnValue.ErrorsEncountered = True
+                Debug.WriteLine("ERROR: " & UserName & " is invalid.")
+                ReturnValue.ErrorList.Add("WARNUNG: Der Benutzername " & UserName & " ist ungültig und wurde ignoriert.")
+                ReturnValue.UserNames.RemoveAt(n) 'Eintrag löschem
+                Continue For 'Keine weitere Verarbeitung
+            End If
+
+            ReturnValue.UserNames.Item(n) = UserName
+        Next
+
         'Ergebnis als String aufbereiten
-        'Dieser Vorgang ist fast ausschließlich für die Bearbeitungsdauer ausschlaggebend --> steuert alleine den Fortschrittsbalken
+        'Dieser Vorgang ist fast ausschließlich für die Bearbeitungsdauer ausschlaggebend
         Debug.WriteLine("Building result string...")
         ReturnValue.ResultString = ReturnValue.UserNames.Count & " Benutzer wurden gefunden." & vbCrLf
 

@@ -16,6 +16,14 @@ Class pageStart
             txtVersion.Text &= " BETA"
             txtVersion.Foreground = Brushes.Red
         End If
+
+        If CurrentState.CurrentContext IsNot Nothing Then
+            btnShowToolbox.IsEnabled = True
+            btnStartWizard.IsEnabled = True
+
+            btnSetContext.IsDefault = False
+            btnStartWizard.IsDefault = True
+        End If
     End Sub
 
     Private Sub OpenLicenseURL(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs)
@@ -32,5 +40,9 @@ Class pageStart
 
     Private Sub GoToToolbox(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs)
         NavigationService.Navigate(New pageToolbox)
+    End Sub
+
+    Private Sub GoSetContext(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs)
+        NavigationService.Navigate(New pageSetContext)
     End Sub
 End Class

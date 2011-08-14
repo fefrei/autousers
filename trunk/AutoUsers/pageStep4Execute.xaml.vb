@@ -140,6 +140,11 @@ Class pageStep4Execute
                 'Benutzer erzeugen
                 NetAPI.CreateUser(UserName, newPassword, My.Settings.ExpireNewPasswords)
 
+                'Home-Dir setzen
+                If My.Settings.setHomeDir Then
+                    NetAPI.SetHomeDir(UserName, My.Settings.HomeDir.Replace("$USER", UserName))
+                End If
+
                 'Benutzer in die Benutzergruppe einordnen
                 If My.Settings.autoAddNewUsersToGroup Then
                     NetAPI.AddUserToGroup(UserName, CurrentState.CurrentUserGroup)

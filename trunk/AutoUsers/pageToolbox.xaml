@@ -60,7 +60,7 @@ You should have received a copy of the GNU General Public License along with Aut
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Row="0" Grid.Column="0" Margin="2">
                     <CheckBox Name="chkUserDisabled" Content="Benutzer deaktiviert" />
-                    <CheckBox Name="chkPasswordExpired" Content="Kennwort abgelaufen" />
+                    <CheckBox Name="chkPasswordExpired" Content="Kennwort abgelaufen" IsThreeState="True" />
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Kennwort:" />
                         <Label Name="lblPassword" FontFamily="Courier New" />

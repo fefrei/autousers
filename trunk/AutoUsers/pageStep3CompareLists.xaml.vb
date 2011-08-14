@@ -45,17 +45,30 @@ Class pageStep3CompareLists
         Dim NewUserList As List(Of String) = Arguments.NewUserList
 
         Dim CurrentUsers As New List(Of String)
-        Debug.WriteLine("Querying current users...")
-        CurrentUsers = NetAPI.GetUsersInGroup(CurrentState.CurrentUserGroup)
 
         Dim Result As New UserChanges
 
-        Debug.WriteLine("Searching new users...")
-        Result.UsersToAdd = ListMembersOfANotInB(NewUserList, CurrentUsers)
-        Debug.WriteLine(Result.UsersToAdd.Count.ToString & " new users found.")
-        Debug.WriteLine("Searching obsolete users...")
-        Result.UsersToDelete = ListMembersOfANotInB(CurrentUsers, NewUserList)
-        Debug.WriteLine(Result.UsersToDelete.Count.ToString & " obsolete users found.")
+        If My.Settings.syncModeSync Then
+            Debug.WriteLine("Querying current users...")
+            CurrentUsers = NetAPI.GetUsersInGroup(CurrentState.CurrentUserGroup)
+
+            If My.Settings.syncModeSyncAdd Then
+                Debug.WriteLine("Searching new users...")
+                Result.UsersToAdd = ListMembersOfANotInB(NewUserList, CurrentUsers)
+                Debug.WriteLine(Result.UsersToAdd.Count.ToString & " new users found.")
+            End If
+            If My.Settings.syncModeSyncDelete Then
+                Debug.WriteLine("Searching obsolete users...")
+                Result.UsersToDelete = ListMembersOfANotInB(CurrentUsers, NewUserList)
+                Debug.WriteLine(Result.UsersToDelete.Count.ToString & " obsolete users found.")
+            End If
+        End If
+        If My.Settings.syncModeAddAll Then
+            Result.UsersToAdd = NewUserList
+        End If
+        If My.Settings.syncModeDeleteAll Then
+            Result.UsersToDelete = NewUserList
+        End If
 
         Debug.WriteLine("Analysis completed.")
         e.Result = Result
@@ -174,4 +187,9 @@ Class pageStep3CompareLists
 
         Return Result
     End Function
+
+    Private Sub btnBuildList_Click(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs) Handles btnBuildList.Click
+        My.Settings.Save()
+        Me.NavigationService.Navigate(New pageStep3CompareLists)
+    End Sub
 End Class

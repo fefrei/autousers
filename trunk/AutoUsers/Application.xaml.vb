@@ -13,7 +13,7 @@ Class Application
     ' Ereignisse auf Anwendungsebene wie Startup, Exit und DispatcherUnhandledException
     ' können in dieser Datei verarbeitet werden.
 
-    Public Const VersionIsBeta As Boolean = False
+    Public Const VersionIsBeta As Boolean = True
 
     Private Sub Application_Startup(ByVal sender As System.Object, ByVal e As System.Windows.StartupEventArgs) Handles MyBase.Startup
         Randomize()
@@ -45,12 +45,17 @@ Class Application
         End If
 
         'Einstellungen aus vorherigen Versionen laden
-        If My.Settings.upgradeSettings Then 'wenn mit Standardeinstellungen gearbeitet wird
-            My.Settings.Upgrade()
-            My.Settings.upgradeSettings = False 'speichert, dass die Einstellungen nun aktuell sind
-            My.Settings.Save()
-            MsgBox("Willkommen bei AutoUsers " & My.Application.Info.Version.ToString & "!" & vbCrLf & "Einstellungen aus vorherigen Versionen wurden übernommen.", MsgBoxStyle.Information)
-        End If
+        Try
+            If My.Settings.upgradeSettings Then 'wenn mit Standardeinstellungen gearbeitet wird
+                My.Settings.Upgrade()
+                My.Settings.upgradeSettings = False 'speichert, dass die Einstellungen nun aktuell sind
+                My.Settings.Save()
+                MsgBox("Willkommen bei AutoUsers " & My.Application.Info.Version.ToString & "!" & vbCrLf & "Einstellungen aus vorherigen Versionen wurden übernommen.", MsgBoxStyle.Information)
+            End If
+        Catch ex As Exception
+            MsgBox("Fehler beim laden / upgraden der Einstellungen." + vbCrLf + "Eventuell ist dies ein Berechtigungsproblem." + ex.Message, MsgBoxStyle.Critical)
+            End
+        End Try
 
         'Copyright-Hinweis
         If Not My.Settings.CopyrightNoticeShown Then 'nur beim ersten Start

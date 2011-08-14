@@ -21,7 +21,7 @@ Class pageStep1ChooseGroup
     End Sub
 
     Private Sub DoQueryGroups(ByVal sender As Object, ByVal e As ComponentModel.DoWorkEventArgs)
-        e.Result = NetAPI.GetGroupNames() 'von der NetAPI die Gruppenliste abfragen
+        e.Result = NetAPI.GetGroupNames
     End Sub
 
     Private Sub DisplayGroupList(ByVal sender As Object, ByVal e As ComponentModel.RunWorkerCompletedEventArgs)

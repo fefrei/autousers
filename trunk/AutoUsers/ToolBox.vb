@@ -190,4 +190,27 @@ Public Class ToolBox
             Return 0
         End Try
     End Function
+
+    Public Shared Function RemoveAccentMarks(ByVal s As String) As String
+
+        Dim normalizedString As String = s.Normalize(Text.NormalizationForm.FormD)
+
+        Dim stringBuilder As New Text.StringBuilder()
+
+        Dim c As Char
+
+        For i = 0 To normalizedString.Length - 1
+
+            c = normalizedString(i)
+
+            If System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c) <> System.Globalization.UnicodeCategory.NonSpacingMark Then
+
+                stringBuilder.Append(c)
+
+            End If
+
+        Next
+
+        Return stringBuilder.ToString
+    End Function
 End Class

@@ -23,7 +23,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>2.1.0.0</ApplicationVersion>
+    <ApplicationVersion>2.2.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -99,6 +99,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System" />
@@ -126,6 +127,9 @@
     </Compile>
     <Compile Include="pageStart.xaml.vb">
       <DependentUpon>pageStart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pageSetContext.xaml.vb">
+      <DependentUpon>pageSetContext.xaml</DependentUpon>
     </Compile>
     <Compile Include="pageStep1ChooseGroup.xaml.vb">
       <DependentUpon>pageStep1ChooseGroup.xaml</DependentUpon>
@@ -170,6 +174,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="pageStart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pageSetContext.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

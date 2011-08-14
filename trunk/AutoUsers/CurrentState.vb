@@ -17,6 +17,7 @@ Public Class CurrentState
     Public Shared CurrentUserList As List(Of String) = Nothing
     Public Shared CurrentUserListFullName As String
     Public Shared CurrentlyPlannedUserChanges As UserChanges = Nothing
+    Public Shared CurrentContext As System.DirectoryServices.AccountManagement.PrincipalContext = Nothing
     Public Shared JobPending As Boolean = False 'Gibt an, ob ein Auftrag schon komplett eingetragen wurden. Wenn dieser Wert gesetzt ist, kehren Assisten auf dem kürzesten Weg zur Zusammenfassung zurück.
     Public Shared LastLog As List(Of String) = Nothing
     Public Shared LastNewUsers As List(Of UserNameWithPassword) = Nothing

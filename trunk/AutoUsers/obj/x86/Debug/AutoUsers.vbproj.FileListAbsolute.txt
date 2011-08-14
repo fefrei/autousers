@@ -124,3 +124,5 @@ C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\AutoUsers.p
 C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageToolbox.baml
 C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageToolbox.g.vb
 C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\bin\Debug\Changelog.txt
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageSetContext.baml
+C:\Users\Felix\Documents\svn\AutoUsers\trunk\AutoUsers\obj\x86\Debug\pageSetContext.g.vb
