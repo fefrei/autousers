@@ -121,16 +121,10 @@ Class pageStep2ChooseFile
                 For m As Integer = UserName.Length - 1 To 0 Step -1
                     If Not Char.IsLetterOrDigit(UserName.ToCharArray()(m)) Then
                         UserName = UserName.Remove(m, 1)
-                        FirstSeparationIndex = m 'der letzte Wert, der hier hereingeschrieben wird, gilt
                     End If
                 Next
 
-                'Vornamen auf 1 Buchstaben kürzen
-                If UserName.Length > 20 And FirstSeparationIndex > 0 Then
-                    UserName = UserName.Remove(1, FirstSeparationIndex - 1)
-                End If
-
-                'Notlösung zum Kürzen des Namens
+                'Kürzen des Namens
                 If UserName.Length > 20 Then
                     UserName = UserName.Substring(0, 20)
                 End If

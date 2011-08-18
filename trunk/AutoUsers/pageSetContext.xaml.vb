@@ -10,7 +10,7 @@
                 NetAPI.GetGroupNames() 'Test context
                 MsgBox("Die Verbindung zum Active Directory wurde aufgebaut.", MsgBoxStyle.Information)
             Catch ex As Exception
-                MsgBox("Fehler beim setzen des Kontextes auf Active Directory." + vbCrLf + ex.Message, MsgBoxStyle.Exclamation)
+                MsgBox("Fehler beim Setzen des Kontextes auf Active Directory." + vbCrLf + ex.Message, MsgBoxStyle.Exclamation)
                 Exit Sub
             End Try
         End If

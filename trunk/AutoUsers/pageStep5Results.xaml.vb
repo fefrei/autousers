@@ -56,4 +56,12 @@ Class pageStep5Results
             MsgBox("Es wurden keine Benutzer angelegt.", MsgBoxStyle.Exclamation)
         End If
     End Sub
+
+    Private Sub btnSaveErrors_Click(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs) Handles btnSaveErrors.Click
+        ToolBox.exportStringList(CurrentState.LastErrorList)
+    End Sub
+
+    Private Sub btnSaveLog_Click(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs) Handles btnSaveLog.Click
+        ToolBox.exportStringList(CurrentState.LastLog)
+    End Sub
 End Class

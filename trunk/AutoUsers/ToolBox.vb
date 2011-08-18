@@ -97,7 +97,20 @@ Public Class ToolBox
         If Not My.Computer.FileSystem.FileExists(My.Settings.deleteUserFilesBatch) Then Throw New Exception("Die in den Einstellungen angegebene Batch-Datei existiert nicht.")
 
         Try
-            Dim myBatchStartInfo = New ProcessStartInfo("cmd.exe", "/Q /S /D /C """"" & My.Settings.deleteUserFilesBatch & """ """ & UserName & """""")
+            Dim myBatchStartInfo = New ProcessStartInfo("cmd.exe", "/Q /S /D /C """"" & My.Settings.deleteUserFilesBatch & """ " & UserName & """")
+            Dim myBatchProcess As Process = Process.Start(myBatchStartInfo)
+            myBatchProcess.WaitForExit()
+        Catch ex As Exception
+            Throw New Exception("Fehler beim Ausführen des Skriptes.", ex)
+        End Try
+    End Sub
+
+    Public Shared Sub createUserDirs(ByVal UserName As String)
+        'Führt ein Batch-Skript aus, das sich um das Anlegen von Verzeichnissen
+        If Not My.Computer.FileSystem.FileExists(My.Settings.createUserDirsBatch) Then Throw New Exception("Die in den Einstellungen angegebene Batch-Datei existiert nicht.")
+
+        Try
+            Dim myBatchStartInfo = New ProcessStartInfo("cmd.exe", "/Q /S /D /C """"" & My.Settings.createUserDirsBatch & """ " & UserName & """")
             Dim myBatchProcess As Process = Process.Start(myBatchStartInfo)
             myBatchProcess.WaitForExit()
         Catch ex As Exception
@@ -116,6 +129,23 @@ Public Class ToolBox
         Next
         Return strResult
     End Function
+
+    Public Shared Sub exportStringList(ByVal myList As List(Of String))
+        'Dateipfad und Dateityp abfragen
+        Dim mySaveFileDialog As New Microsoft.Win32.SaveFileDialog() With {.Filter = "Textdatei|*.txt"}
+        Dim UserCompletedForm As Boolean = mySaveFileDialog.ShowDialog
+        If UserCompletedForm = False Then Exit Sub
+        Dim FilePath As String = mySaveFileDialog.FileName
+
+        Dim myFileWriter As New System.IO.StreamWriter(FilePath, False)
+        For Each myItem In myList
+            myFileWriter.WriteLine(myItem)
+        Next
+
+        myFileWriter.Close()
+
+        MsgBox("Exportieren erfolgreich abgeschlossen.", MsgBoxStyle.Information)
+    End Sub
 
     Public Shared Sub exportUserPasswordList(ByVal myList As List(Of UserNameWithPassword))
         'Exportiert eine Liste aus Benutzernamen und Passwörtern. Diese Funktion ist interaktiv (!) und hat eine eigene Fehlerbehandlung.
