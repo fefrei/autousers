@@ -352,6 +352,78 @@ Partial Friend NotInheritable Class MySettings
             Me("syncModeDeleteAll") = value
         End Set
     End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+    Public Property setProfileDir() As Boolean
+        Get
+            Return CType(Me("setProfileDir"),Boolean)
+        End Get
+        Set
+            Me("setProfileDir") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property ProfileDir() As String
+        Get
+            Return CType(Me("ProfileDir"),String)
+        End Get
+        Set
+            Me("ProfileDir") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+    Public Property setLogonScript() As Boolean
+        Get
+            Return CType(Me("setLogonScript"),Boolean)
+        End Get
+        Set
+            Me("setLogonScript") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property LogonScript() As String
+        Get
+            Return CType(Me("LogonScript"),String)
+        End Get
+        Set
+            Me("LogonScript") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("<keine Angabe>")>  _
+    Public Property createUserDirsBatch() As String
+        Get
+            Return CType(Me("createUserDirsBatch"),String)
+        End Get
+        Set
+            Me("createUserDirsBatch") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+    Public Property createUserDirs() As Boolean
+        Get
+            Return CType(Me("createUserDirs"),Boolean)
+        End Get
+        Set
+            Me("createUserDirs") = value
+        End Set
+    End Property
 End Class
 
 Namespace My

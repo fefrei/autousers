@@ -47,6 +47,14 @@ Class pageSettings
         My.Settings.deleteUserFilesBatch = OpenFileDialog.FileName
     End Sub
 
+    Private Sub SetNewCreateUserDirsBatch(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs)
+        Dim OpenFileDialog As New Microsoft.Win32.OpenFileDialog() With {.Filter = "Batch-Dateien|*.bat"}
+        Dim UserCompletedForm As Boolean = OpenFileDialog.ShowDialog
+        If UserCompletedForm = False Or OpenFileDialog.FileName = "" Then Exit Sub
+
+        My.Settings.createUserDirsBatch = OpenFileDialog.FileName
+    End Sub
+
     Private Sub txtPasswordChars_TextChanged(ByVal sender As System.Object, ByVal e As System.Windows.Controls.TextChangedEventArgs) Handles txtPasswordChars.TextChanged
         If WarnOnReductionOfPwdChars Then
             Dim SecurePasswordLength As Long = ToolBox.getSecurePasswordLength(txtPasswordChars.Text)

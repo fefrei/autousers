@@ -39,6 +39,8 @@ You should have received a copy of the GNU General Public License along with Aut
                         <Run>Keine Protokolleinträge.</Run>
                     </ListBox>
                 </GroupBox>
+                <Button Name="btnSaveErrors" Content="Fehler exportieren" />
+                <Button Name="btnSaveLog" Content="Protokoll exportieren" />
             </StackPanel>
         </ScrollViewer>
         <TextBlock Grid.Row="0" Text="Auftrag ausgeführt!" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />

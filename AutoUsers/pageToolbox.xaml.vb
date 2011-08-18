@@ -136,9 +136,20 @@ Class pageToolbox
                         'Benutzer erzeugen
                         NetAPI.CreateUser(UserName, newPassword, My.Settings.ExpireNewPasswords)
 
-                        'Home-Dir setzen
+                        'Verzeichnisse anlegen
+                        If My.Settings.createUserDirs Then
+                            ToolBox.createUserDirs(UserName)
+                        End If
+
+                        'Verzeichnisse setzen
                         If My.Settings.setHomeDir Then
                             NetAPI.SetHomeDir(UserName, My.Settings.HomeDir.Replace("$USER", UserName))
+                        End If
+                        If My.Settings.setProfileDir Then
+                            NetAPI.SetProfileDir(UserName, My.Settings.ProfileDir.Replace("$USER", UserName))
+                        End If
+                        If My.Settings.setLogonScript Then
+                            NetAPI.SetLogonScript(UserName, My.Settings.LogonScript.Replace("$USER", UserName))
                         End If
 
                         'Benutzer in die Benutzergruppe einordnen
@@ -181,13 +192,16 @@ Class pageToolbox
             lblPassword.Content = Result.UserOptions.Password
             chkUserDisabled.IsChecked = Result.UserOptions.UserIsDisabled
             chkPasswordExpired.IsChecked = Result.UserOptions.PasswordExpired
+            txtHomeDir.Text = Result.UserOptions.HomeDir
+            txtProfileDir.Text = Result.UserOptions.ProfileDir
+            txtLogonScript.Text = Result.UserOptions.LogonScript
             SetUIState(True)
         End If
     End Sub
 
     Private Sub btnSaveUserOptions_Click(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs) Handles btnSaveUserOptions.Click
         SetUIState(True, True)
-        bgwUserOptionsWorker.RunWorkerAsync(New UserOptionsArgument(True, cbUserSelector.Text, New UserOptions(chkUserDisabled.IsChecked, chkPasswordExpired.IsChecked, lblPassword.Content)))
+        bgwUserOptionsWorker.RunWorkerAsync(New UserOptionsArgument(True, cbUserSelector.Text, New UserOptions(chkUserDisabled.IsChecked, chkPasswordExpired.IsChecked, lblPassword.Content, txtHomeDir.Text, txtProfileDir.Text, txtLogonScript.Text)))
     End Sub
 
     Private Sub btnResetPassword_Click(ByVal sender As System.Object, ByVal e As System.Windows.RoutedEventArgs) Handles btnResetPassword.Click

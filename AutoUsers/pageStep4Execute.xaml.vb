@@ -140,9 +140,26 @@ Class pageStep4Execute
                 'Benutzer erzeugen
                 NetAPI.CreateUser(UserName, newPassword, My.Settings.ExpireNewPasswords)
 
-                'Home-Dir setzen
+                'Verzeichnisse anlegen
+                If My.Settings.createUserDirs Then
+                    Try
+                        ToolBox.createUserDirs(UserName)
+                    Catch ex As Exception
+                        'Fehler beim Löschen der Dateien
+                        LogBuffer.Add("Fehler! Details im Fehlerprotokoll.")
+                        ErrorList.Add("Die Dateien des Benutzers " & UserName & " konnten nicht gelöscht werden. Fehlermeldung: " & ex.Message)
+                    End Try
+                End If
+
+                'Verzeichnisse setzen
                 If My.Settings.setHomeDir Then
                     NetAPI.SetHomeDir(UserName, My.Settings.HomeDir.Replace("$USER", UserName))
+                End If
+                If My.Settings.setProfileDir Then
+                    NetAPI.SetProfileDir(UserName, My.Settings.ProfileDir.Replace("$USER", UserName))
+                End If
+                If My.Settings.setLogonScript Then
+                    NetAPI.SetLogonScript(UserName, My.Settings.LogonScript.Replace("$USER", UserName))
                 End If
 
                 'Benutzer in die Benutzergruppe einordnen

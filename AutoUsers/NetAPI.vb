@@ -96,11 +96,86 @@ Public Class NetAPI
     End Sub
 #End Region
 
-#Region "SetHomeDir"
+#Region "ProfileDir"
+    Public Shared Function GetProfileDir(ByVal UserName As String) As String
+        Dim user = UserPrincipal.FindByIdentity(CurrentState.CurrentContext, UserName)
+
+        If Not TypeOf user.GetUnderlyingObject Is DirectoryServices.DirectoryEntry Then
+            Throw New Exception("Fehler bei GetProfileDir: Der Objekttyp ist nicht DirectoryEntry.")
+        End If
+
+        Return CType(user.GetUnderlyingObject, DirectoryServices.DirectoryEntry).Properties("profilePath").Value
+    End Function
+
+    Public Shared Sub SetProfileDir(ByVal UserName As String, ByVal NewProfileDir As String)
+        Dim user = UserPrincipal.FindByIdentity(CurrentState.CurrentContext, UserName)
+
+        If NewProfileDir Is Nothing Then NewProfileDir = ""
+
+        If Not TypeOf user.GetUnderlyingObject Is DirectoryServices.DirectoryEntry Then
+            Throw New Exception("Fehler bei SetProfileDir: Der Objekttyp ist nicht DirectoryEntry.")
+        End If
+
+        CType(user.GetUnderlyingObject, DirectoryServices.DirectoryEntry).Properties("profilePath").Value = NewProfileDir
+
+        user.Save()
+    End Sub
+#End Region
+
+#Region "LogonScript"
+    Public Shared Function GetLogonScript(ByVal UserName As String) As String
+        Dim user = UserPrincipal.FindByIdentity(CurrentState.CurrentContext, UserName)
+
+        If Not TypeOf user.GetUnderlyingObject Is DirectoryServices.DirectoryEntry Then
+            Throw New Exception("Fehler bei GetLogonScript: Der Objekttyp ist nicht DirectoryEntry.")
+        End If
+
+        Return CType(user.GetUnderlyingObject, DirectoryServices.DirectoryEntry).Properties("scriptPath").Value
+    End Function
+
+    Public Shared Sub SetLogonScript(ByVal UserName As String, ByVal NewLogonScript As String)
+        Dim user = UserPrincipal.FindByIdentity(CurrentState.CurrentContext, UserName)
+
+        If NewLogonScript Is Nothing Then NewLogonScript = ""
+
+        If Not TypeOf user.GetUnderlyingObject Is DirectoryServices.DirectoryEntry Then
+            Throw New Exception("Fehler bei SetLogonScript: Der Objekttyp ist nicht DirectoryEntry.")
+        End If
+
+        CType(user.GetUnderlyingObject, DirectoryServices.DirectoryEntry).Properties("scriptPath").Value = NewLogonScript
+
+        user.Save()
+    End Sub
+#End Region
+
+#Region "HomeDir"
+    Public Shared Function GetHomeDir(ByVal UserName As String) As String
+        Dim user = UserPrincipal.FindByIdentity(CurrentState.CurrentContext, UserName)
+
+        If Not TypeOf user.GetUnderlyingObject Is DirectoryServices.DirectoryEntry Then
+            Throw New Exception("Fehler bei GetHomeDir: Der Objekttyp ist nicht DirectoryEntry.")
+        End If
+
+        Return CType(user.GetUnderlyingObject, DirectoryServices.DirectoryEntry).Properties("homeDrive").Value & "|" & CType(user.GetUnderlyingObject, DirectoryServices.DirectoryEntry).Properties("homeDirectory").Value
+    End Function
+
     Public Shared Sub SetHomeDir(ByVal UserName As String, ByVal NewHomeDir As String)
         Dim user = UserPrincipal.FindByIdentity(CurrentState.CurrentContext, UserName)
 
-        user.HomeDirectory = NewHomeDir
+        If Not TypeOf user.GetUnderlyingObject Is DirectoryServices.DirectoryEntry Then
+            Throw New Exception("Fehler bei SetHomeDir: Der Objekttyp ist nicht DirectoryEntry.")
+        End If
+
+        If NewHomeDir.Contains("|") Then
+            Dim separators() As Char = {"|"}
+            Dim parameters() As String = NewHomeDir.Split(separators, 2)
+
+            CType(user.GetUnderlyingObject, DirectoryServices.DirectoryEntry).Properties("homeDirectory").Value = parameters(1)
+            CType(user.GetUnderlyingObject, DirectoryServices.DirectoryEntry).Properties("homeDrive").Value = parameters(0)
+        Else
+            CType(user.GetUnderlyingObject, DirectoryServices.DirectoryEntry).Properties("homeDirectory").Value = NewHomeDir
+            CType(user.GetUnderlyingObject, DirectoryServices.DirectoryEntry).Properties("homeDrive").Value = ""
+        End If
 
         user.Save()
     End Sub
@@ -122,6 +197,9 @@ Public Class NetAPI
 
         ReturnValue.UserIsDisabled = Not user.Enabled
         ReturnValue.PasswordExpired = Nothing 'Reading not supported
+        ReturnValue.HomeDir = GetHomeDir(UserName)
+        ReturnValue.ProfileDir = GetLogonScript(UserName)
+        ReturnValue.LogonScript = GetLogonScript(UserName)
 
         Return ReturnValue
     End Function
@@ -142,6 +220,10 @@ Public Class NetAPI
         End If
 
         user.Enabled = Not newUserOptions.UserIsDisabled
+
+        SetHomeDir(UserName, newUserOptions.HomeDir)
+        SetProfileDir(UserName, newUserOptions.ProfileDir)
+        SetLogonScript(UserName, newUserOptions.LogonScript)
 
         user.Save()
     End Sub

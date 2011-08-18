@@ -18,8 +18,8 @@ You should have received a copy of the GNU General Public License along with Aut
       Title="Toolbox">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="55"/>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="20"/>
             <RowDefinition />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Toolbox" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -52,6 +52,7 @@ You should have received a copy of the GNU General Public License along with Aut
             <Grid Name="gridUserOptions" Grid.ColumnSpan="2" Grid.Row="3" Grid.Column="0" IsEnabled="False">
                 <Grid.RowDefinitions>
                     <RowDefinition />
+                    <RowDefinition />
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -71,7 +72,24 @@ You should have received a copy of the GNU General Public License along with Aut
                     <Button Name="btnSetPassword" Content="Kenwort ändern" Margin="2" />
                     <Button Name="btnDeleteUser" Content="Benutzer löschen" Margin="2" />
                 </StackPanel>
-                <Button Name="btnSaveUserOptions" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Content="Änderungen speichern" Margin="2" />
+                <Grid Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Content="Home-Verzeichnis:" />
+                    <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Content="Profil-Verzeichnis:" />
+                    <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Content="Anmeldeskript:" />
+                    <TextBox Name="txtHomeDir" Grid.Row="0" Grid.Column="1" />
+                    <TextBox Name="txtProfileDir" Grid.Row="1" Grid.Column="1" />
+                    <TextBox Name="txtLogonScript" Grid.Row="2" Grid.Column="1" />
+                </Grid>
+                <Button Name="btnSaveUserOptions" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Content="Änderungen speichern" Margin="2" />
             </Grid>
         </Grid>
     </Grid>
