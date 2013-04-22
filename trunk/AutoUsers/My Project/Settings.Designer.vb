@@ -424,6 +424,54 @@ Partial Friend NotInheritable Class MySettings
             Me("createUserDirs") = value
         End Set
     End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+    Public Property contextSAM() As Boolean
+        Get
+            Return CType(Me("contextSAM"),Boolean)
+        End Get
+        Set
+            Me("contextSAM") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+    Public Property contextAD() As Boolean
+        Get
+            Return CType(Me("contextAD"),Boolean)
+        End Get
+        Set
+            Me("contextAD") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property contextADName() As String
+        Get
+            Return CType(Me("contextADName"),String)
+        End Get
+        Set
+            Me("contextADName") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+    Public Property contextADContainer() As String
+        Get
+            Return CType(Me("contextADContainer"),String)
+        End Get
+        Set
+            Me("contextADContainer") = value
+        End Set
+    End Property
 End Class
 
 Namespace My
